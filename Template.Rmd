@@ -1,0 +1,128 @@
+---
+title: "**Étude de l’évolution du coût des APC**"
+subtitle: "Phase 1-2-3. Sous-titre"
+output: 
+    html_document:
+        theme: paper
+        toc: yes
+        toc_float: yes
+        code_folding: hide
+        include:
+            after_body: footer.html
+        
+knit: (
+  function(inputFile, encoding) { 
+    
+    rmarkdown::render(inputFile, params = "ask",  
+      encoding    = encoding,
+      output_dir = "../reports", 
+      output_file = paste0(tools::file_path_sans_ext(inputFile), "_", Sys.Date(),".html")) })
+---
+
+<style>
+body {
+text-align: justify
+}
+</style> 
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	eval = TRUE,
+#	echo = FALSE,
+	fig.align = "center",
+	fig.show = "hold",
+	message = FALSE,
+	warning = FALSE,
+	collapse = TRUE,
+	out.width = "100%"
+)
+```
+
+<br>
+
+[![logo_datactivist](https://nextcloud.datactivist.coop/s/o53wzfMNnFosQni/preview)](https://datactivist.coop/fr/){width=25%}
+
+<br>
+
+----
+
+**Nature** : nature
+
+**Source** : [lien vers les données]()
+
+**Date début de l'analyse** : date
+
+
+<br>
+
+---
+
+## I - Données brutes
+
+
+
+```{r libraries et import}
+# Packages nécessaires à l'analyse
+packages = c("tidyverse", "data.table", "summarytools", "plotly", "kableExtra", "knitr", "DT")
+
+## Installation des packages si besoin et chargement des librairies
+package.check <- lapply(
+  packages,
+  FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  }
+)
+
+# Import des données
+    #lien page données
+start_time <- Sys.time()
+data <- fread("https://storage.gra.cloud.ovh.net/v1/AUTH_32c5d10cb0fe4519b957064a111717e3/bso_dump/bso-publications-20220118.csv.gz", na.strings=c("","NA"))
+end_time <- Sys.time()
+
+# Configuration du temps d’exécution de la commande
+import_time <- end_time - start_time
+import_time <- paste(round(as.numeric(import_time, units.difftime(import_time)),2), units.difftime(import_time))
+```
+
+**Temps d'exécution de l'import des données** : `r import_time`.
+
+**Dimensions du jeu de données brut** : `r nrow(data)` observations et `r ncol(data)` variables.
+
+**Les 100 premières observations** :
+
+```{r}
+kable(data[c(1:100),], format = "html") %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = T, 
+                font_size = 9, 
+                fixed_thead = TRUE,  #fix headers when scrolling 
+                html_font = "sans-serif") %>% 
+  scroll_box(width = "100%", height = "600px")
+```
+
+
+
+<br>
+
+---
+
+## II - Statistiques descriptives
+
+<br>
+
++ Nombre de **valeurs manquantes** : 
+
+```{r}
+# On compte le nombre de valeurs manquantes
+nb_NA <- as.data.frame(apply(is.na(data), 2, sum)) %>% 
+                       rename(`nombre de NA` = `apply(is.na(data), 2, sum)`) %>%
+                       mutate(pourcentage = `nombre de NA`/nrow(data)*100) %>% 
+                       mutate(pourcentage = round(pourcentage, 2))
+nb_NA %>% datatable(options=list(pageLength=ncol(data), searching=F), width = '60%')
+```
+
+<br>
