@@ -6,6 +6,7 @@ output:
         theme: paper
         toc: yes
         toc_float: yes
+        toc_depth: 6
         code_folding: hide
         include:
             after_body: footer.html
@@ -27,15 +28,25 @@ text-align: justify
 
 
 ```{r setup, include=FALSE}
+# Settings summarytools
+library(summarytools)
+st_options(plain.ascii = FALSE               # This is very handy in all Rmd documents
+         , style = "rmarkdown"               # This too
+         , footnote = NA                     # Avoids footnotes which would clutter the results
+         , subtitle.emphasis = FALSE
+         # This is a setting to experiment with - according to the theme used, it might improve the headings layout
+)
+      
+# General settings     
 knitr::opts_chunk$set(
 	eval = TRUE,
-#	echo = FALSE,
 	fig.align = "center",
 	fig.show = "hold",
 	message = FALSE,
 	warning = FALSE,
 	collapse = TRUE,
-	out.width = "100%"
+	out.width = "100%",
+    results = 'asis'
 )
 ```
 
