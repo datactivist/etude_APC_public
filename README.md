@@ -10,3 +10,7 @@ Une méthodologie en 3 étapes :
 
 ------------
 Mission co-exécutée par [Datactivist](https://datactivist.coop/fr/) et [Pleiade Managment & Consultancy](https://pleiade.nl/fr/).
+
+<br>
+
+<img src="https://nextcloud.datactivist.coop/s/kdB4nBMeMPATib2/preview" width="30%">
