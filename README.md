@@ -1,6 +1,6 @@
 # Étude rétrospective et prospective de l’évolution du coût des APC et des abonnements pour les institutions françaises
 
-Réalisation d'une étude pour l'ABES, dans le but d’estimer le plus précisément possible les coûts cachés supplémentaires que les établissements français encourent, en plus de leurs coûts d’abonnement à des revues électroniques.
+Réalisation d'une étude pour Abes / MESRI / Couperin.org, dans le but d’estimer le plus précisément possible les coûts cachés supplémentaires que les établissements français encourent, en plus de leurs coûts d’abonnement à des revues électroniques.
 
 Une méthodologie en 3 étapes : 
 
