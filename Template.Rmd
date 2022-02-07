@@ -6,6 +6,7 @@ output:
         theme: paper
         toc: yes
         toc_float: yes
+        toc_depth: 6
         code_folding: hide
         include:
             after_body: footer.html
@@ -16,7 +17,7 @@ knit: (
     rmarkdown::render(inputFile, params = "ask",  
       encoding    = encoding,
       output_dir = "../reports", 
-      output_file = paste0(tools::file_path_sans_ext(inputFile), "_", Sys.Date(),".html")) })
+      output_file = paste0(tools::file_path_sans_ext(inputFile), ".html")) })
 ---
 
 <style>
@@ -27,31 +28,41 @@ text-align: justify
 
 
 ```{r setup, include=FALSE}
+# Settings summarytools
+library(summarytools)
+st_options(plain.ascii = FALSE               # This is very handy in all Rmd documents
+         , style = "rmarkdown"               # This too
+         , footnote = NA                     # Avoids footnotes which would clutter the results
+         , subtitle.emphasis = FALSE
+         # This is a setting to experiment with - according to the theme used, it might improve the headings layout
+)
+      
+# General settings     
 knitr::opts_chunk$set(
 	eval = TRUE,
-#	echo = FALSE,
 	fig.align = "center",
 	fig.show = "hold",
 	message = FALSE,
 	warning = FALSE,
 	collapse = TRUE,
-	out.width = "100%"
+	out.width = "100%",
+    results = 'asis'
 )
 ```
 
 <br>
 
-[![logo_datactivist](https://nextcloud.datactivist.coop/s/o53wzfMNnFosQni/preview)](https://datactivist.coop/fr/){width=25%}
+[![logo_datactivist](https://nextcloud.datactivist.coop/s/o53wzfMNnFosQni/preview)](https://datactivist.coop/fr/){width=25%} \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [![logo_pleiade](https://nextcloud.datactivist.coop/s/GnAMYqr7Ec3STFS/preview)](https://pleiade.nl/fr/){width=45%}
 
 <br>
 
 ----
 
-**Nature** : nature
+**Objectif** : objectif
 
 **Source** : [lien vers les données]()
 
-**Date début de l'analyse** : date
+**Date début de l'analyse** : jour mois 2022
 
 
 <br>
