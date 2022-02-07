@@ -306,7 +306,11 @@ end_time &lt;- Sys.time()
 # Configuration du temps d’exécution de la commande
 import_time &lt;- end_time - start_time
 import_time &lt;- paste(round(as.numeric(import_time, units.difftime(import_time)),2), units.difftime(import_time))</code></pre>
+<<<<<<< HEAD:reports/Template.html
 <p><strong>Temps d’exécution de l’import des données</strong> : 37.82 secs.</p>
+=======
+<p><strong>Temps d’exécution de l’import des données</strong> : 18.96 secs.</p>
+>>>>>>> 9eb4d3f9ac19696caa8e7adc5f13d0a1980030e0:reports/Template_2022-02-04.html
 <p><strong>Dimensions du jeu de données brut</strong> : 1340197 observations et 27 variables.</p>
 <p><strong>Les 100 premières observations</strong> :</p>
 <pre class="r"><code>kable(data[c(1:100),], format = &quot;html&quot;) %&gt;% 
@@ -8721,8 +8725,13 @@ nb_NA &lt;- as.data.frame(apply(is.na(data), 2, sum)) %&gt;%
                        mutate(pourcentage = `nombre de NA`/nrow(data)*100) %&gt;% 
                        mutate(pourcentage = round(pourcentage, 2))
 nb_NA %&gt;% datatable(options=list(pageLength=ncol(data), searching=F), width = &#39;60%&#39;)</code></pre>
+<<<<<<< HEAD:reports/Template.html
 <div id="htmlwidget-654594f7aaacc3f5f191" style="width:60%;height:auto;" class="datatables html-widget"></div>
 <script type="application/json" data-for="htmlwidget-654594f7aaacc3f5f191">{"x":{"filter":"none","vertical":false,"data":[["doi","year","title","journal_issns","journal_issn_l","journal_name","publisher","publisher_dissemination","hal_id","pmid","bso_classification","bsso_classification","domains","lang","genre","amount_apc_EUR","detected_countries","bso_local_affiliations","is_oa","journal_is_in_doaj","journal_is_oa","observation_date","oa_host_type","oa_colors","licence_publisher","licence_repositories","repositories"],[0,472,34,175851,175877,19465,16,0,1105463,983262,0,987053,983262,1459,2,974813,654410,1185039,0,0,0,0,0,0,877915,835173,835473],[0,0.04,0,13.12,13.12,1.45,0,0,82.49,73.37,0,73.65,73.37,0.11,0,72.74,48.83,88.42,0,0,0,0,0,0,65.51,62.32,62.34]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>nombre de NA<\/th>\n      <th>pourcentage<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":27,"searching":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,25,27,50,100]}},"evals":[],"jsHooks":[]}</script>
+=======
+<div id="htmlwidget-bb7348e0088ba18fb6f8" style="width:60%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bb7348e0088ba18fb6f8">{"x":{"filter":"none","vertical":false,"data":[["doi","year","title","journal_issns","journal_issn_l","journal_name","publisher","publisher_dissemination","hal_id","pmid","bso_classification","bsso_classification","domains","lang","genre","amount_apc_EUR","detected_countries","bso_local_affiliations","is_oa","journal_is_in_doaj","journal_is_oa","observation_date","oa_host_type","oa_colors","licence_publisher","licence_repositories","repositories"],[0,472,34,175851,175877,19465,16,0,1105463,983262,0,987053,983262,1459,2,974813,654410,1185039,0,0,0,0,0,0,877915,835173,835473],[0,0.04,0,13.12,13.12,1.45,0,0,82.49,73.37,0,73.65,73.37,0.11,0,72.74,48.83,88.42,0,0,0,0,0,0,65.51,62.32,62.34]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>nombre de NA<\/th>\n      <th>pourcentage<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":27,"searching":false,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,25,27,50,100]}},"evals":[],"jsHooks":[]}</script>
+>>>>>>> 9eb4d3f9ac19696caa8e7adc5f13d0a1980030e0:reports/Template_2022-02-04.html
 <p><br></p>
 </div>
 
