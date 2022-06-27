@@ -201,7 +201,9 @@ Oui
   <tr>
    <td>doaj
 <p>
-openAPC       openAPC_estimation_issn
+openAPC
+  <p>
+    openAPC_estimation_issn
 <p>
 openAPC_estimation_issn_year 
 <p>
