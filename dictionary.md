@@ -1,8 +1,8 @@
 # Dictionnaire des variables du jeu de données de l’étude APC
 
-Auteurs : Diane Thierry, Antoine Blanchard, Maurits van der Graaf
+## Auteurs : Diane Thierry, Antoine Blanchard, Maurits van der Graaf
 
-Date : May 16, 2022
+## Date : May 16, 2022
 
 **doi** : Identifiant unique de l'article
 
