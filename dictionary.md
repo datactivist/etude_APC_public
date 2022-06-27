@@ -292,8 +292,6 @@ APC estimés; moyenne des APC connus par éditeur et par an dans OpenAPC
 </table>
 
 
-**	**
-
 **publisher_group** : nom de l’éditeur normalisé par année 
 
 
