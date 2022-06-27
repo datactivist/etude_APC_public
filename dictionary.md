@@ -37,26 +37,25 @@ Date : May 16, 2022
   <tr>
    <td>…
    </td>
-   <td>Biology (fond.)
-<p>
+   <td>Biology (fond.)<br />
 Chemistry
-<p>
+<br />
 Computer and information sciences
-<p>
+<br />
 Earth, Ecology, Energy and applied biology
-<p>
+<br />
 Engineering
-<p>
+<br />
 Humanities
-<p>
+<br />
 Mathematics
-<p>
+<br />
 Medical research
-<p>
+<br />
 Physical sciences, Astronomy
-<p>
+<br />
 Social sciences
-<p>
+<br />
 unknown
    </td>
   </tr>
