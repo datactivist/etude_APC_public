@@ -390,22 +390,21 @@ Oui
 
 <table>
   <tr>
-   <td>1
-<p>
-2
-<p>
-3
-<p>
-4
-   </td>
-   <td>Elsevier
-<p>
-Springer-Nature, Wiley, MDPI
-<p>
-OpenEdition, CAIRN, Oxford University Press, Informa, Frontiers, American Chemical Society, Wolters Kluwer Health, EDP Sciences, American Physical Society, IEEE, Royal Society of Chemistry, IOP Publishing, SAGE Publications, British Medical Journal, Public Library of Science, Cambridge University Press
-<p>
-Tous les autres éditeurs (“longue traîne”)
-   </td>
+    <td>1</td>
+    <td>Elsevier</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Springer-Nature, Wiley, MDPI</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>OpenEdition, CAIRN, Oxford University Press, Informa, Frontiers, American Chemical Society, Wolters Kluwer Health, EDP Sciences, American Physical Society, IEEE, Royal Society of Chemistry, IOP Publishing, SAGE Publications, British Medical Journal, Public Library of Science, Cambridge University Press
+</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Tous les autres éditeurs (“longue traîne”)</td>
   </tr>
 </table>
 
@@ -753,22 +752,24 @@ Oui
 
 <table>
   <tr>
-   <td>closed
-<p>
-publisher
-  <p>publisher;repository       
-<p>
-repository
-   </td>
-   <td>pas d’accès ouvert
-<p>
-site de l’éditeur
-<p>
-site de l’éditeur et archive ouverte
-<p>
-archive ouverte
-   </td>
+    <td>closed</td>
+    <td>pas d’accès ouvert</td>
   </tr>
+  <tr>
+    <tr>
+    <td>publisher</td>
+          <td>site de l’éditeur</td>
+  </tr>
+  <tr>
+    <tr>
+    <td>publisher;repository   </td>
+          <td>site de l’éditeur et archive ouverte</td>
+  </tr>
+  <tr>
+    <tr>
+    <td>repository</td>
+      <td>archive ouverte</td>
+</tr>
 </table>
 
 
