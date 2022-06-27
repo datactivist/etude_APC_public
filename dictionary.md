@@ -35,30 +35,49 @@ Date : May 16, 2022
 
 <table>
   <tr>
-   <td>…
-   </td>
-   <td>Biology (fond.)<br />
-Chemistry
-<br />
-Computer and information sciences
-<br />
-Earth, Ecology, Energy and applied biology
-<br />
-Engineering
-<br />
-Humanities
-<br />
-Mathematics
-<br />
-Medical research
-<br />
-Physical sciences, Astronomy
-<br />
-Social sciences
-<br />
-unknown
-   </td>
+    <td></td>
+    <td>Biology (fond.)</td>
   </tr>
+  <tr>
+     <td></td>
+    <td>Chemistry</td>
+  </tr>
+  <tr>
+     <td></td>
+    <td>Computer and information sciences</td>
+      </tr>
+  <tr>
+     <td></td>
+    <td>Earth, Ecology, Energy and applied biology</td>
+      </tr>
+  <tr>
+     <td>…</td>
+    <td>Engineering</td>
+      </tr>
+  <tr>
+       <td></td>
+    <td>Humanities</td>
+      </tr>
+  <tr>
+       <td></td>
+    <td>Mathematics</td>
+      </tr>
+  <tr>
+       <td></td>
+    <td>Medical research</td>
+      </tr>
+  <tr>
+       <td></td>
+    <td>Physical sciences, Astronomy</td>
+      </tr>
+  <tr>
+    <td></td>
+    <td>Social sciences</td>
+      </tr>
+  <tr>
+    <td></td>
+    <td>unknown</td>
+      </tr>
 </table>
 
 
@@ -752,7 +771,8 @@ Oui
   <tr>
    <td>closed
 <p>
-publisher publisher;repository       
+publisher
+  <p>publisher;repository       
 <p>
 repository
    </td>
