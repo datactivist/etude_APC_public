@@ -1,34 +1,8 @@
-<!-- Output copied to clipboard! -->
-
-<!-----
-
-Yay, no errors, warnings, or alerts!
-
-Conversion time: 0.848 seconds.
-
-
-Using this Markdown file:
-
-1. Paste this output into your source file.
-2. See the notes and action items below regarding this conversion run.
-3. Check the rendered output (headings, lists, code blocks, tables) for proper
-   formatting and use a linkchecker before you publish this page.
-
-Conversion notes:
-
-* Docs to Markdown version 1.0β33
-* Mon Jun 27 2022 15:40:51 GMT-0700 (PDT)
-* Source doc: Dictionnaire des variables
-* Tables are currently converted to HTML tables.
------>
-
-
-
 # Dictionnaire des variables du jeu de données de l’étude APC
 
 Auteurs : Diane Thierry, Antoine Blanchard, Maurits van der Graaf
 
-Date : 
+Date : May 16, 2022
 
 **doi** : Identifiant unique de l'article
 
