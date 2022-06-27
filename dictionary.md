@@ -99,23 +99,17 @@ Date : May 16, 2022
 
 <table>
   <tr>
-   <td>fr
-<p>
-en
-<p>
-de
-<p>
-…
-   </td>
-   <td>France
-<p>
-Pays anglophones
-<p>
-Allemagne
-<p>
-[…]
-   </td>
-  </tr>
+    <td>fr</td>
+    <td>France</td>
+  </tr>    <tr>
+  <tr>
+    <td>en</td>
+    <td>Pays anglophones</td>
+  </tr>    <tr>
+  <tr>
+    <td>de</td>
+    <td>Allemagnes</td>
+  </tr> 
 </table>
 
 
@@ -163,22 +157,16 @@ Allemagne
 
 <table>
   <tr>
-   <td>en
-<p>
-fr
-<p>
-es
-<p>
-…
-   </td>
-   <td>Anglais
-<p>
-Français
-<p>
-Espagnol
-<p>
-[...]
-   </td>
+    <td>en</td>
+    <td>Anglais</td>
+  </tr>
+  <tr>
+        <td>fr</td>
+    <td>Français</td>
+    </tr>
+  <tr>
+        <td>es</td>
+    <td>Espagnol</td>
   </tr>
 </table>
 
@@ -201,14 +189,12 @@ Espagnol
 
 <table>
   <tr>
-   <td>0
-<p>
-1
-   </td>
-   <td>Non
-<p>
-Oui
-   </td>
+   <td>0</td>
+    <td>Non</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Oui</td>
   </tr>
 </table>
 
@@ -218,30 +204,28 @@ Oui
 
 <table>
   <tr>
-   <td>doaj
-<p>
-openAPC
-  <p>
-    openAPC_estimation_issn
-<p>
-openAPC_estimation_issn_year 
-<p>
-openAPC_estimation_publisher
-<p>
-openAPC_estimation_publisher_year
-   </td>
-   <td>APC fourni par la liste de prix DOAJ
-<p>
-APC fourni dans OpenAPC
-<p>
-APC estimés; moyenne des APC connus par revue dans OpenAPC
-<p>
-APC estimés; moyenne des APC connus par revue et par an dans OpenAPC
-<p>
-APC estimés; moyenne des APC connus par éditeur dans OpenAPC
-<p>
-APC estimés; moyenne des APC connus par éditeur et par an dans OpenAPC
-   </td>
+    <td>doaj</td>
+    <td>APC fourni par la liste de prix DOAJ</td>
+  </tr>
+  <tr>
+    <td>openAPC</td>
+    <td>APC fourni dans OpenAPC</td>
+  </tr>
+  <tr>
+    <td>openAPC_estimation_issn</td>
+    <td>APC estimés : moyenne des APC connus par revue dans OpenAPC</td>
+  </tr>
+  <tr>
+    <td>openAPC_estimation_issn_year</td>
+    <td>APC estimés : moyenne des APC connus par revue et par an dans OpenAPC</td>
+  </tr>
+  <tr>
+    <td>openAPC_estimation_publisher</td>
+    <td>APC estimés : moyenne des APC connus par éditeur dans OpenAPC</td>
+  </tr>
+  <tr>
+    <td>openAPC_estimation_publisher_year</td>
+    <td>APC estimés : moyenne des APC connus par éditeur et par an dans OpenAPC</td>
   </tr>
 </table>
 
