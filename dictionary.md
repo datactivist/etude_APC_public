@@ -2,7 +2,7 @@
 
 ## Auteurs : Diane Thierry, Antoine Blanchard, Maurits van der Graaf
 
-## Date : May 16, 2022
+## Date : 16 Mai, 2022
 
 **doi** : Identifiant unique de l'article
 
