@@ -282,6 +282,19 @@
 </table>
 
 
+**amount_apc_EUR_trusted** : montant des APC payés en euros, où la source du montant est fiable (les APC provenants des sources “openAPC_estimation_publisher” et “openAPC_estimation_publisher_year” sont supprimés)
+
+
+<table>
+  <tr>
+   <td>…
+   </td>
+   <td>coefficient numérique
+   </td>
+  </tr>
+</table>
+
+
 **count_apc_openapc_key** : nombre d’articles ayant servi de base pour estimer les APC
 
 
@@ -833,6 +846,19 @@ Oui
    <td>…
    </td>
    <td>gold, hybrid, bronze, green, closed
+   </td>
+  </tr>
+</table>
+
+
+**oa_color_finale** : couleur OA de l’article, variable finale où les articles sont “diamond” selon le BSO (variable ‘oa_color_article_BSO’), “gold” ou “hybrid” selon OpenAlex
+
+
+<table>
+  <tr>
+   <td>…
+   </td>
+   <td>diamond, gold, hybrid, other
    </td>
   </tr>
 </table>
