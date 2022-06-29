@@ -184,7 +184,7 @@
 </table>
 
 
-**has_apc** : l’article est disponible en accès ouvert, quelle que soit la raison : gold, hybride, bronze, delayed-OA… (l’intitulé de cette variable, issue du BSO, est donc impropre) 
+**has_apc** : l’article est disponible en accès ouvert sur le site de l'éditeur, quelle que soit la raison : gold, hybride, bronze, delayed-OA… (NB : le nom de cette variable, issue du BSO, est donc impropre) 
 
 
 <table>
