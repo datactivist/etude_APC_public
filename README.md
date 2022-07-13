@@ -9,7 +9,7 @@ Une méthodologie en 3 étapes :
 - **prédire** l'évolution du coût des APC pour différents scénarios
 
 ------------
-Mission co-exécutée par [Datactivist](https://datactivist.coop/fr/) (Antoine Blanchard, Diane Thierry) et [Pleiade Managment & Consultancy](https://pleiade.nl/fr/) (Maurits van der Graaf).
+Mission co-exécutée par [Datactivist](https://datactivist.coop/fr/) (Antoine Blanchard, Diane Thierry) et [Pleiade Management & Consultancy](https://pleiade.nl/fr/) (Maurits van der Graaf).
 
 <br>
 
