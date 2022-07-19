@@ -39,14 +39,14 @@
 <circle cx='517.39' cy='222.63' r='1.70' style='stroke-width: 2.13; stroke: #FFFFFF;' />
 <circle cx='601.28' cy='187.73' r='1.70' style='stroke-width: 2.13; stroke: #FFFFFF;' />
 <circle cx='685.16' cy='112.43' r='1.70' style='stroke-width: 2.13; stroke: #FFFFFF;' />
-<text x='78.67' y='326.82' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='33.54px' lengthAdjust='spacingAndGlyphs'>   7.3 M€</text>
-<text x='137.92' y='316.66' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='33.54px' lengthAdjust='spacingAndGlyphs'>   8.7 M€</text>
-<text x='216.98' y='292.28' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   10.7 M€</text>
-<text x='300.85' y='267.49' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   12.7 M€</text>
-<text x='384.74' y='246.16' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   14.5 M€</text>
-<text x='468.63' y='225.64' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   16.2 M€</text>
-<text x='552.51' y='190.77' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   19.0 M€</text>
-<text x='636.41' y='115.49' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   25.2 M€</text>
+<text x='89.08' y='341.85' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='33.54px' lengthAdjust='spacingAndGlyphs'>   7.3 M€</text>
+<text x='169.56' y='324.12' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='33.54px' lengthAdjust='spacingAndGlyphs'>   8.7 M€</text>
+<text x='278.20' y='284.73' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   10.7 M€</text>
+<text x='337.09' y='275.06' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   12.7 M€</text>
+<text x='445.82' y='238.71' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   14.5 M€</text>
+<text x='505.01' y='233.13' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   16.2 M€</text>
+<text x='588.83' y='198.35' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   19.0 M€</text>
+<text x='672.94' y='122.93' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   25.2 M€</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw0MzIuMDA=)'>
 <polyline points='68.62,413.19 68.62,23.54 ' style='stroke-width: 1.07; stroke-linecap: butt;' />

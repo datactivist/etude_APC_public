@@ -64,13 +64,17 @@
 <text x='200.74' y='393.70' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   89.5 M€</text>
 <text x='286.86' y='388.32' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   91.5 M€</text>
 <text x='372.98' y='382.93' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   93.5 M€</text>
-<text x='459.08' y='377.70' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   95.5 M€</text>
-<text x='511.43' y='380.58' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   97.5 M€</text>
-<text x='183.58' y='241.45' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='47.92px' lengthAdjust='spacingAndGlyphs'>  146.3 M€</text>
-<text x='269.70' y='225.43' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='47.92px' lengthAdjust='spacingAndGlyphs'>  152.2 M€</text>
-<text x='355.81' y='210.06' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='47.92px' lengthAdjust='spacingAndGlyphs'>  158.0 M€</text>
-<text x='441.93' y='195.34' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='47.92px' lengthAdjust='spacingAndGlyphs'>  163.4 M€</text>
-<text x='490.38' y='181.26' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='47.92px' lengthAdjust='spacingAndGlyphs'>  168.7 M€</text>
+<text x='459.08' y='377.69' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   95.5 M€</text>
+<text x='511.44' y='380.59' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   97.5 M€</text>
+<line x1='177.90' y1='240.75' x2='180.41' y2='238.64' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='264.06' y1='224.69' x2='266.53' y2='222.62' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='356.96' y1='203.64' x2='354.43' y2='205.76' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='436.33' y1='194.57' x2='438.76' y2='192.53' style='stroke-width: 1.07; stroke: #333333;' />
+<text x='171.02' y='249.67' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='47.92px' lengthAdjust='spacingAndGlyphs'>  146.3 M€</text>
+<text x='257.02' y='233.60' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='47.92px' lengthAdjust='spacingAndGlyphs'>  152.2 M€</text>
+<text x='363.92' y='201.84' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='47.92px' lengthAdjust='spacingAndGlyphs'>  158.0 M€</text>
+<text x='429.46' y='203.49' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='47.92px' lengthAdjust='spacingAndGlyphs'>  163.4 M€</text>
+<text x='497.17' y='181.26' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='47.92px' lengthAdjust='spacingAndGlyphs'>  168.7 M€</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw0MzIuMDA=)'>
 <polyline points='73.65,413.19 73.65,37.80 ' style='stroke-width: 1.07; stroke-linecap: butt;' />

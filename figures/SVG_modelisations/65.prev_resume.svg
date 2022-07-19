@@ -132,8 +132,8 @@
 <text x='433.33' y='355.76' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   32.5 M€</text>
 <text x='530.07' y='342.79' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   40.1 M€</text>
 <text x='626.81' y='329.46' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   47.9 M€</text>
-<text x='624.38' y='122.90' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='50.51px' lengthAdjust='spacingAndGlyphs'>   168.7 M€</text>
-<text x='630.08' y='244.62' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   97.5 M€</text>
+<text x='626.51' y='122.89' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='50.51px' lengthAdjust='spacingAndGlyphs'>   168.7 M€</text>
+<text x='657.87' y='236.58' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   97.5 M€</text>
 </g>
 <g clip-path='url(#cpMC4wMHw4NjQuMDB8MC4wMHw0MzIuMDA=)'>
 <polyline points='80.88,413.19 80.88,23.54 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
@@ -173,30 +173,30 @@
 <line x1='702.06' y1='191.79' x2='715.88' y2='191.79' style='stroke-width: 1.07; stroke: #FFCC00; stroke-linecap: butt;' />
 <line x1='702.06' y1='191.79' x2='715.88' y2='191.79' style='stroke-width: 1.49; stroke: #FFCC00; stroke-linecap: butt;' />
 <line x1='702.06' y1='191.79' x2='715.88' y2='191.79' style='stroke-width: 1.49; stroke: #FFCC00; stroke-linecap: butt;' />
-<line x1='702.06' y1='209.07' x2='715.88' y2='209.07' style='stroke-width: 1.07; stroke: #0072B2; stroke-linecap: butt;' />
-<line x1='702.06' y1='209.07' x2='715.88' y2='209.07' style='stroke-width: 1.07; stroke: #0072B2; stroke-linecap: butt;' />
-<line x1='702.06' y1='209.07' x2='715.88' y2='209.07' style='stroke-width: 1.07; stroke: #0072B2; stroke-linecap: butt;' />
-<line x1='702.06' y1='209.07' x2='715.88' y2='209.07' style='stroke-width: 1.49; stroke: #0072B2; stroke-linecap: butt;' />
-<line x1='702.06' y1='209.07' x2='715.88' y2='209.07' style='stroke-width: 1.49; stroke: #0072B2; stroke-linecap: butt;' />
+<line x1='702.06' y1='209.07' x2='715.88' y2='209.07' style='stroke-width: 1.07; stroke: #666666; stroke-linecap: butt;' />
+<line x1='702.06' y1='209.07' x2='715.88' y2='209.07' style='stroke-width: 1.07; stroke: #666666; stroke-linecap: butt;' />
+<line x1='702.06' y1='209.07' x2='715.88' y2='209.07' style='stroke-width: 1.07; stroke: #666666; stroke-linecap: butt;' />
+<line x1='702.06' y1='209.07' x2='715.88' y2='209.07' style='stroke-width: 1.49; stroke: #666666; stroke-linecap: butt;' />
+<line x1='702.06' y1='209.07' x2='715.88' y2='209.07' style='stroke-width: 1.49; stroke: #666666; stroke-linecap: butt;' />
 <line x1='702.06' y1='226.35' x2='715.88' y2='226.35' style='stroke-width: 1.07; stroke: #009E73; stroke-linecap: butt;' />
 <line x1='702.06' y1='226.35' x2='715.88' y2='226.35' style='stroke-width: 1.07; stroke: #009E73; stroke-linecap: butt;' />
 <line x1='702.06' y1='226.35' x2='715.88' y2='226.35' style='stroke-width: 1.07; stroke: #009E73; stroke-linecap: butt;' />
 <line x1='702.06' y1='226.35' x2='715.88' y2='226.35' style='stroke-width: 1.49; stroke: #009E73; stroke-linecap: butt;' />
 <line x1='702.06' y1='226.35' x2='715.88' y2='226.35' style='stroke-width: 1.49; stroke: #009E73; stroke-linecap: butt;' />
-<line x1='702.06' y1='243.63' x2='715.88' y2='243.63' style='stroke-width: 1.07; stroke: #666666; stroke-linecap: butt;' />
-<line x1='702.06' y1='243.63' x2='715.88' y2='243.63' style='stroke-width: 1.07; stroke: #666666; stroke-linecap: butt;' />
-<line x1='702.06' y1='243.63' x2='715.88' y2='243.63' style='stroke-width: 1.07; stroke: #666666; stroke-linecap: butt;' />
-<line x1='702.06' y1='243.63' x2='715.88' y2='243.63' style='stroke-width: 1.49; stroke: #666666; stroke-linecap: butt;' />
-<line x1='702.06' y1='243.63' x2='715.88' y2='243.63' style='stroke-width: 1.49; stroke: #666666; stroke-linecap: butt;' />
+<line x1='702.06' y1='243.63' x2='715.88' y2='243.63' style='stroke-width: 1.07; stroke: #0072B2; stroke-linecap: butt;' />
+<line x1='702.06' y1='243.63' x2='715.88' y2='243.63' style='stroke-width: 1.07; stroke: #0072B2; stroke-linecap: butt;' />
+<line x1='702.06' y1='243.63' x2='715.88' y2='243.63' style='stroke-width: 1.07; stroke: #0072B2; stroke-linecap: butt;' />
+<line x1='702.06' y1='243.63' x2='715.88' y2='243.63' style='stroke-width: 1.49; stroke: #0072B2; stroke-linecap: butt;' />
+<line x1='702.06' y1='243.63' x2='715.88' y2='243.63' style='stroke-width: 1.49; stroke: #0072B2; stroke-linecap: butt;' />
 <line x1='702.06' y1='260.91' x2='715.88' y2='260.91' style='stroke-width: 1.07; stroke: #FF0000; stroke-linecap: butt;' />
 <line x1='702.06' y1='260.91' x2='715.88' y2='260.91' style='stroke-width: 1.07; stroke: #FF0000; stroke-linecap: butt;' />
 <line x1='702.06' y1='260.91' x2='715.88' y2='260.91' style='stroke-width: 1.07; stroke: #FF0000; stroke-linecap: butt;' />
 <line x1='702.06' y1='260.91' x2='715.88' y2='260.91' style='stroke-width: 1.49; stroke: #FF0000; stroke-linecap: butt;' />
 <line x1='702.06' y1='260.91' x2='715.88' y2='260.91' style='stroke-width: 1.49; stroke: #FF0000; stroke-linecap: butt;' />
 <text x='723.09' y='195.37' style='font-size: 10.00px; font-family: "Arial";' textLength='59.66px' lengthAdjust='spacingAndGlyphs'>full gold APC</text>
-<text x='723.09' y='212.65' style='font-size: 10.00px; font-family: "Arial";' textLength='66.38px' lengthAdjust='spacingAndGlyphs'>relief scenario</text>
+<text x='723.09' y='212.65' style='font-size: 10.00px; font-family: "Arial";' textLength='122.54px' lengthAdjust='spacingAndGlyphs'>subscription expenditures</text>
 <text x='723.09' y='229.93' style='font-size: 10.00px; font-family: "Arial";' textLength='63.65px' lengthAdjust='spacingAndGlyphs'>rush scenario</text>
-<text x='723.09' y='247.21' style='font-size: 10.00px; font-family: "Arial";' textLength='122.54px' lengthAdjust='spacingAndGlyphs'>subscription expenditures</text>
+<text x='723.09' y='247.21' style='font-size: 10.00px; font-family: "Arial";' textLength='66.38px' lengthAdjust='spacingAndGlyphs'>relief scenario</text>
 <text x='723.09' y='264.49' style='font-size: 10.00px; font-family: "Arial";' textLength='129.95px' lengthAdjust='spacingAndGlyphs'>trends continue unchanged</text>
 <text x='80.88' y='14.90' style='font-size: 13.20px; font-family: "Arial";' textLength='357.02px' lengthAdjust='spacingAndGlyphs'>Prévisions du montant total d'APC payés selon le scénario</text>
 </g>

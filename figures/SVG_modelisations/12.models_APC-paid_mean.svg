@@ -47,14 +47,14 @@
 <polyline points='71.44,338.24 143.75,268.08 216.06,234.08 288.36,199.02 360.67,150.27 432.98,121.58 505.28,84.88 577.59,42.26 ' style='stroke-width: 1.07; stroke: #0072B2; stroke-linecap: butt;' />
 <polyline points='71.44,346.46 143.75,259.48 216.06,237.13 288.36,193.40 360.67,160.19 432.98,113.15 505.28,84.18 577.59,44.68 ' style='stroke-width: 1.07; stroke: #D55E00; stroke-linecap: butt;' />
 <polyline points='71.44,318.42 143.75,279.61 216.06,238.15 288.36,199.15 360.67,159.21 432.98,119.23 505.28,80.92 577.59,41.90 ' style='stroke-width: 1.07; stroke: #CC79A7; stroke-linecap: butt;' />
-<text x='62.37' y='390.91' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1555</text>
-<text x='134.68' y='323.94' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1622</text>
-<text x='206.98' y='185.90' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1761</text>
-<text x='279.29' y='146.35' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1801</text>
-<text x='351.60' y='111.77' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1836</text>
-<text x='423.90' y='97.99' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1850</text>
-<text x='496.21' y='99.02' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1849</text>
-<text x='561.22' y='57.90' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1890</text>
+<text x='82.90' y='390.96' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1555</text>
+<text x='132.17' y='340.21' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1622</text>
+<text x='227.53' y='185.94' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1761</text>
+<text x='299.94' y='146.40' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1801</text>
+<text x='372.25' y='111.82' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1836</text>
+<text x='444.43' y='98.04' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1850</text>
+<text x='493.81' y='115.20' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1849</text>
+<text x='585.17' y='57.96' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>  1890</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw0MzIuMDA=)'>
 <polyline points='46.13,413.19 46.13,23.54 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
