@@ -282,7 +282,7 @@
 </table>
 
 
-**amount_apc_EUR_trusted** : montant des APC payés en euros, où la source du montant est fiable (les APC provenants des sources “openAPC_estimation_publisher” et “openAPC_estimation_publisher_year” sont supprimés)
+**amount_apc_EUR_trusted** : montant des APC payés en euros, où la source du montant est fiable (les APC provenants des sources “openAPC_estimation_publisher” et “openAPC_estimation_publisher_year” sont supprimés). 15.273 montants ont été complétés pour les articles pour lesquels des APC ont été payés, l’auteur correspondant est français mais le montant était manquant ou non fiable. C'est le montant moyen par tier et par année qui a été imputé à ces 15.273 articles.
 
 
 <table>
@@ -580,7 +580,7 @@ Oui
 </table>
 
 
-**is_french_CA_bso_wos_openalex_single_lang** : il y a au moins un auteur correspondant affilié en France selon le BSO, le WOS ou OpenAlex, ou lorsque l’article est rédigé par un seul auteur ou encore lorsqu’il est rédigé en français (_variable finale, computation des 4 variables intermédiaires ci-dessus_)
+**is_french_CA_bso_wos_openalex_single_lang** : il y a au moins un auteur correspondant (CA) affilié en France selon le BSO, le WOS ou OpenAlex, ou lorsque l’article est rédigé par un seul auteur ou encore lorsqu’il est rédigé en français (_variable finale, computation des 4 variables intermédiaires ci-dessus_). 17.587 nationalités de CA ont été complétées pour les articles pour lesquels des APC ont été payés mais la nationalité du CA était manquante. C'est la proportion entre CA français et non français par tier et par année qui a été respectée pour imputer les valeurs à ces 17.587 articles.
 
 
 <table>
