@@ -1,0 +1,1849 @@
+---
+title: "**Étude de l’évolution du coût des APC**"
+subtitle: "Phase 1. Exploration des données - ***BSO complet***"
+output: 
+    html_document:
+       # self_contained: false
+        theme: paper
+        toc: yes
+        toc_float: yes
+        toc_depth: 6
+        code_folding: hide
+        include:
+            after_body: footer.html
+        
+knit: (
+  function(inputFile, encoding) { 
+    
+    rmarkdown::render(inputFile, params = "ask",  
+      encoding    = encoding,
+      output_dir = "../reports", 
+      output_file = paste0(tools::file_path_sans_ext(inputFile), ".html")) })
+---
+
+<style>
+body {
+text-align: justify
+}
+</style> 
+
+
+
+
+
+```{r setup, include=FALSE}
+# Settings summarytools
+library(summarytools)
+st_options(plain.ascii = FALSE,               # This is very handy in all Rmd documents
+           style = "rmarkdown",               # This too
+           footnote = NA,                    # Avoids footnotes which would clutter the results
+           subtitle.emphasis = FALSE
+         # This is a setting to experiment with - according to the theme used, it might improve the headings layout
+)
+      
+# General settings     
+knitr::opts_chunk$set(
+	eval = TRUE,
+	fig.align = "center",
+	fig.show = "hold",
+	message = FALSE,
+	error = FALSE,
+	warning = FALSE,
+	collapse = TRUE,
+	out.width = "100%",
+    results = 'asis'
+)
+```
+
+<br>
+
+[![logo_datactivist](https://nextcloud.datactivist.coop/s/o53wzfMNnFosQni/preview)](https://datactivist.coop/fr/){width=25%} \ \ \ \ \ \ \ \ \ \ [![logo_pleiade](https://nextcloud.datactivist.coop/s/GnAMYqr7Ec3STFS/preview)](https://pleiade.nl/fr/){width=49%}
+
+<br>
+
+----
+
+**Objectif** : Exploration de données
+
+**Source des données** : Baromètre de la Science Ouverte - données complètes
+
+**Date début de l'analyse** : 28 février 2022
+
+**Date de la dernière modification** : `r format(Sys.time(), '%d %B %Y')`
+
+<br>
+
+---
+
+## I - Méthodologie suivie pour traiter les données
+
+<br>
+
+Étant donné la **taille** (8 fichiers de plus d'1 GB en moyenne) et le **format** ([JSON Lines](https://jsonlines.org/)) des données, il a fallu dans un premier temps les traiter pour les remettre dans un format tabulaire exploitable, les nettoyer puis les transformer avant d'en commencer l'exploration. 
+
+Les **étapes** suivantes ont été suivies : 
+
+- téléchargement des fichiers JSON Lines (.jsonl), un par année soit 8 fichiers (de 2013 à 2020) ;
+- création pour chaque année de 5 sous-objets JSON (.json) ; 
+    + un contenant toutes les variables non imbriquées (soit 46 variables) qui peuvent être remises au format tabulaire facilement (même format que les [données du BSO publiques](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/open-access-monitor-france/information/))
+    + puis un ficher par objet initialement imbriqué, soit 4 fichiers pour les objets "*affiliations*", "*authors*", "*oa-details*" et "*bsso_classification*" qui ont été désemboîtés avant d'être exportés au format JSON
+- tests et vérification d'hypothèses sur les 5 fichiers de données ;
+- gestion des variables (sélection, création, filtres) et regroupement des sous-objets en une base prête à l'emploi ; 
+- ajout des données du Web of Science (parvenues le 15 avril).
+
+
+
+Les **scripts** dans lesquels se trouvent les commandes exécutées pour ces différentes tâches sont les suivants : 
+
+- étape n°2 : '*pre-processing_bso.R*' ;
+- étape n°3 : '*hypothesis_bso.R*' ;
+- étape n°4 : '*managing-variables.R*' ;
+- étape n°5 : '*integrate_WOS_to_BSO.R*'.
+
+
+<br>
+
+## II - Tests et hypothèses
+
+<br>
+
+Check de la **redondance** de certaines colonnes (par rapport aux intuitions et aux noms de certaines variables) : 
+
+- les colonnes ***doi*** et ***id*** sont identiques
+- les colonnes ***author_useful_rank_countries*** et ***detected_countries*** sont différentes
+- les colonnes ***genre*** et ***genre_raw*** sont différentes
+
+<br>
+
+Check des informations contenues dans les 4 colonnes de **date** : 
+
+- '*publication_year*' (exemple : "2014")
+- '*publication_date*' (exemple : "2014-12-30T00:00:00")
+- '*published_date*' (exemple : "2020-09-01T00:00:00")
+- '*Year*' (exemple : "2020")
+
+Après extraction des années ('YYYY') dans les colonnes '*publication_date*' et '*published_date*', puis comparaison avec les colonnes existantes '*publication_year*' et '*Year*', il résulte que : 
+
+- '*publication_year*' correspond à l'année 'YYYY' de '*publication_date*'
+- '*year*' correspond à l'année 'YYYY' de '*published_date*'
+
+
+<br>
+
+Check de la **constance** de la variable '*is_oa*' contenue dans l'objet '*oa_details*', pour laquelle il y a une valeur sur 4 périodes différentes : 2018, 2019, 2020 et 2021Q4. 
+
+On compare les valeurs de tous les articles de la base pour ces 4 dates (via la fonction `identical(col1, col2)`) :
+
+- les valeurs de la variable '*is_oa*' varient au cours du temps, aucune de ces 4 colonnes n'est identique. 
+
+
+<br>
+
+
+## III - Gestion des variables
+
+<br>
+
+La quatrième étape est consacrée à la gestion des données de manière générale, avec 3 actions différentes : suppression, création de variables, filtres sur les observations. Le tableau suivant résume les actions réalisées sur les variables de chaque objet :
+
+
+<style type="text/css">
+.tg  {border:none;border-collapse:collapse;border-color:#ccc;border-spacing:0;margin:0px auto;}
+.tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-aa13{background-color:#f9f9f9;border-color:#000000;text-align:center;vertical-align:top}
+.tg .tg-8kjb{background-color:#cccccc;border-color:#000000;font-weight:bold;position:-webkit-sticky;position:sticky;text-align:left;
+  top:-1px;vertical-align:top;will-change:transform}
+.tg .tg-baqh{text-align:center;vertical-align:top}
+.tg .tg-buh4{background-color:#f9f9f9;text-align:left;vertical-align:top}
+.tg .tg-njqc{background-color:#f9f9f9;border-color:#000000;font-style:italic;text-align:left;vertical-align:top}
+.tg .tg-wp8o{border-color:#000000;text-align:center;vertical-align:top}
+.tg .tg-3o7t{background-color:#f9f9f9;font-style:italic;text-align:left;vertical-align:top}
+.tg .tg-ttwp{background-color:#cccccc;border-color:#000000;font-style:italic;position:-webkit-sticky;position:sticky;
+  text-align:left;top:-1px;vertical-align:top;will-change:transform}
+.tg .tg-i817{background-color:#f9f9f9;border-color:#000000;text-align:left;vertical-align:top}
+.tg .tg-lmxn{border-color:#000000;font-style:italic;text-align:left;vertical-align:top}
+.tg .tg-73oq{border-color:#000000;text-align:left;vertical-align:top}
+.tg .tg-8zwo{font-style:italic;text-align:left;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+.tg .tg-dzk6{background-color:#f9f9f9;text-align:center;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-ttwp">Objet</th>
+    <th class="tg-8kjb">Variables écartées</th>
+    <th class="tg-8kjb">Nombre de suppressions</th>
+    <th class="tg-8kjb">Variables créées</th>
+    <th class="tg-8kjb">Filtres appliqués</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-njqc">Variables non imbriquées</td>
+    <td class="tg-i817">datasource, domains, grants, has_grant, id, is_paratext, journal_title, mesh_headings, pmid, publication_date, publication_year, published_date, publisher, publisher, sources, title_first_author, title_first_author_raw, url, currency_apc_doaj, journal_or_publisher_in_bealls_list, publisher_normalized, genre_raw, french_affiliations_types, author_useful_rank_fr, author_useful_rank_countries, observation_dates, has_coi, amount_apc_openapc_EUR, count_apc_openapc_EUR, bso_local_affiliations, keywords</td>
+    <td class="tg-aa13">31</td>
+    <td class="tg-i817">tier, journal_color, journal_color_doaj, journal_color_qoam, is_covered_by_couperin, part_APC_paid_by_couperin, part_APC_paid_by_authors</td>
+    <td class="tg-i817">seuls les publications du genre “<span style="font-style:italic">journal-article</span>” sont gardés</td>
+  </tr>
+  <tr>
+    <td class="tg-lmxn">Authors</td>
+    <td class="tg-73oq">external_ids...5, grid, first_name, full_name, last_name, external_ids...15, affiliation, orcid, adress.line, city, postal.code, url, social.media, suffix, ORCID, authenticate.orcid, sequence</td>
+    <td class="tg-wp8o">17</td>
+    <td class="tg-73oq">is_french_CA, is_french_CA_wos, is_non_french_CA_wos, is_french_CA_openalex, is_at_least_one_french_author, is_complete_affiliation, nb_missing_affiliation, nb_authors</td>
+    <td class="tg-73oq">pour les publications de plus de 10 auteurs, seuls les 5 premières et 5 dernières affiliations sont gardées, ainsi que celle de l’auteur correspondant (CA)</td>
+  </tr>
+  <tr>
+    <td class="tg-njqc">Affiliations</td>
+    <td class="tg-i817">toutes</td>
+    <td class="tg-aa13">8</td>
+    <td class="tg-i817"></td>
+    <td class="tg-i817"></td>
+  </tr>
+  <tr>
+    <td class="tg-8zwo">Bsso_classification</td>
+    <td class="tg-0lax">toutes</td>
+    <td class="tg-baqh">4</td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+  </tr>
+  <tr>
+    <td class="tg-3o7t">Oa_details</td>
+    <td class="tg-buh4">oa_details.2020.snapshot_date,  oa_details.2020.licence_repositories, oa_details.2020.repositories, oa_details.2020.repositories_url, oa_details.2020.repositories_pmh, oa_details.2020.repositories_institution, oa_details.2020.oa_locations et **toutes les autres variables** des périodes 2018, 2019 et 2021Q4.</td>
+    <td class="tg-dzk6">52</td>
+    <td class="tg-buh4">oa_color_article_BSO, oa_color_openalex, apc_has_been_paid</td>
+    <td class="tg-buh4"></td>
+  </tr>
+</tbody>
+</table>
+
+
+
+<br>
+
+### Créations de variables
+
+<br>
+
+
+Sur les 15 variables créées parmi les 5 sous-objets extraits du BSO, **8** ont été crées à partir des **données disponibles dans la base initiale**, et **7** ont été crées en recoupant avec des **données externes**.
+Nous expliquons dans un premier temps les étapes de construction des 5 variables transformées depuis les données du BSO, puis nous reviendrons sur les 2 variables créées à partir de données externes.
+
+<br>
+
+|        <font size="5">&rarr; À partir des données du BSO</font>
+
+<br>
+
+La variable '***tier***' correspond à la classe de l'éditeur. Nous avons défini 4 classes à partir des données de l'année 2020, en classant les 20 plus gros éditeurs, c'est-à-dire ceux qui ont édité le plus de publications de type '*journal-article*'. Les classes créées pour les 8 années (2013-2020) sont les suivantes :  
+
+- **tier 1** : Elsevier ; 
+- **tier 2** : Springer-Nature, Wiley, MDPI ;
+- **tier 3** : OpenEdition, CAIRN, Oxford University Press, Informa, Frontiers, American Chemical Society, Wolters Kluwer Health, EDP Sciences, American Physical Society, IEEE, Royal Society of Chemistry, IOP Publishing, SAGE Publications, British Medical Journal, Public Library of Science, Cambridge University Press ;
+- **tier 4** : les 1994 éditeurs restants, constituant ainsi la *longue traîne*.
+
+La répartition des articles entre ces classes pour l'année 2020 (année de référence) est la suivante : 
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky"><span style="font-weight:bold">**tier**</span></th>
+    <th class="tg-c3ow"><span style="font-weight:bold">**nombre d'articles**</span></th>
+    <th class="tg-c3ow"><span style="font-weight:bold">**pourcentage**</span></th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky">1</td>
+    <td class="tg-c3ow">39 521</td>
+    <td class="tg-c3ow">27,91%</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">2</td>
+    <td class="tg-c3ow">35 736</td>
+    <td class="tg-c3ow">25,24%</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">3</td>
+    <td class="tg-c3ow">40 313</td>
+    <td class="tg-c3ow">28,48%</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">4</td>
+    <td class="tg-c3ow">26 011</td>
+    <td class="tg-c3ow">18,37%</td>
+  </tr>
+</tbody>
+</table>
+
+
+
+<br>
+
+<br>
+
+
+La variable '***is_french_CA***' correspond à la nationalité de l'auteur correspondant, elle prend la valeur *1* si l'auteur correspondant est français, *0* sinon. Sa création est faite à partir des variables du BSO '*detected_countries*' et '*name*', elles listent respectivement la **nationalité** de chaque auteur d'une publication et le **nom de son affiliation** - dans lequel est précisé le pays. 
+
+Ce premier champ '*detected_countries*' est présent à 2 niveaux ; un premier niveau non imbriqué où 1 entrée correspond à 1 publication (seules les valeurs **uniques** sont listées dans ce champ), et un second niveau initialement imbriqué (celui des auteurs) où 1 entrée correspond à 1 auteur d'une publication, pour qui on retrouve la nationalité. C'est notamment à partir de ce second niveau que la variable '***is_french_CA***' a été créée, car il liste **toutes** les affiliations connues pour une publication (pas seulement les valeurs uniques) et est accompagné du champ '*corresponding*' qui prend la valeur 'TRUE' lorsque l'auteur est l'auteur correspondant. Dans cette variable '*detected_countries*', lorsqu'un auteur a plusieurs affiliations, les pays de ces dernières sont listés dans la variable (ex: `c("us","fr")`). 
+
+Le second champ '*name*' est une compilation des colonnes du même nom, que l'on retrouvait dans l'objet des auteurs, imbriquées soit derrière le champ '***affiliations***', soit derrière le champ '***affiliation***' (sans 's').
+
+- En désimbriquant le champ '***affiliations***', on obtient 2 variables (entre autres) : '*detected_countries*' et '*name*'. La variable '*detected_countries*' correspond à l'identifiant du pays de l'affiliation (ex: 'fr' pour 'France'), affiliation que l'on trouve en chaîne de caractères dans la variable '*name*'.
+- En désimbriquant le champ '***affiliation***' (sans 's'), on obtient 1 variable : '*name*'. Celle-ci correspond au nom de l'affiliation comme dans le champ '***affiliations***', mais dont le pays n'a pas été extrait et mis dans une autre variable '*detected_countries*'. Pour créer la variable '***is_french_CA***' nous prenons donc en compte ces 2 champs.
+ 
+
+Après avoir groupé les données par DOI, la règle de décision suivante a été appliquée : 
+
+- lorsque l'auteur correspondant a au moins 1 affiliation française, ou que tous les auteurs ont au moins 1 affiliation française (`(corresponding == 'TRUE' & ((grepl("fr", detected_countries) == TRUE) | grepl("France", name) == TRUE))` ou `all(grepl("fr", detected_countries) == TRUE) | all(grepl("France", name) == TRUE)`), alors la variable prend la valeur **1** ;
+- lorsque l'auteur correspondant n'a pas d'affiliation française, ou que toutes les affiliations des auteurs sont connues mais qu'aucune n'est française, la variable prend la valeur **0** ;
+- dans les autres cas, c'est-à-dire quand l'auteur correspondant n'est pas connu, ou que **toutes** les affiliations ne sont pas connues, la variable prend la valeur '*NA*' (valeur manquante).
+
+
+
+<br>
+
+
+La variable '***is_at_least_one_french_author***' informe si au moins un auteur de la publication est français, elle prend la valeur *1* si c'est le cas, *0* sinon.
+
+De la même manière que pour la variable '***is_french_CA***', la création de cette nouvelle variable est basée sur les colonnes du BSO '*detected_countries*' et '*name*', au niveau des auteurs, puis elle est enrichie par une deuxième passe sur la variable '*detected_countries*' au niveau des articles (qui liste tous les pays **uniques** d'une publication). Après avoir groupé les données par DOI, la règle de décision suivante a été appliquée : 
+
+- lorsqu'au moins 1 auteur de la publication a au moins 1 affiliation française (`any(grepl("fr", detected_countries) == TRUE) | any(grepl("France", name) == TRUE)`), alors la variable prend la valeur **1** ;
+- lorsque toutes les affiliations des auteurs sont connues mais qu'aucune n'est française, la variable prend la valeur **0** ;
+- dans les autres cas, c'est-à-dire où **toutes** les affiliations ne sont pas connues, la variable prend la valeur '*NA*'.
+
+
+<br>
+
+
+La variable '***is_complete_affiliation***' informe si l'affiliation de tous les auteurs d'une publication est connue, elle prend la valeur *1* si c'est le cas, *0* sinon. Après avoir groupé les données par DOI, la règle de décision suivante a été appliquée : 
+
+- lorsque le champ '*detected_countries*' a au moins 1 valeur manquante, alors la variable prend la valeur **0** ;
+- dans les autres cas, c'est-à-dire où aucune affiliation n'est manquante, la variable prend la valeur **1**.
+
+
+<br>
+
+
+La variable '***nb_missing_affiliation***' compte le nombre d'auteurs pour lesquels l'affiliation n'est pas connue. De pair avec la variable '***nb_authors***' (expliquée ci-dessous), elle permet de savoir le nombre d'affiliations manquantes par rapport au nombre d'auteurs pour une publication (à utiliser éventuellement plus tard pour appliquer une règle de décision).
+
+
+<br>
+
+
+La variable '***nb_authors***' correspond au nombre d'auteurs par publication. À partir des données du BSO qui listent les auteurs par publication (1 ligne = 1 auteur), nous avons groupé les données par DOI puis compté le nombre d'observations par groupe.
+
+<br>
+
+<style>
+div.blue { background-color:#efefef; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+ <FONT COLOR="#333333">**Une précision**
+
+Les manipulations des variables '***is_french_CA***', '***is_at_least_one_french_author***', '***is_complete_affiliation***', '***nb_missing_affiliation***' et '***nb_authors***' réalisées à partir de l'objet des auteurs, ont été appliquées **avant** de filtrer les observations en ne gardant que les 5 premières et 5 dernières affiliations d'auteurs, de manière à ne pas biaiser les variables créées.
+
+</div>
+
+<br>
+
+La variable '***oa_color_article_BSO***' correspond au statut libre accès du journal dans lequel sont publiés les articles. Il s'agit de la variable contenue dans les données originales du BSO '*oa_details.2020.oa_colors_with_priority_to_publisher*', qui a été simplement modifiée pour regrouper certaines catégories. Les couleurs '*green_only*', '*closed*' et '*other*' ont ainsi été regroupées sous la catégorie '*subscription*'. 
+
+
+<br>
+
+
+
+La variable '***journal_color***' correspond aussi au statut libre accès du journal dans lequel sont publiés les articles. Mais contrairement à la variable précédente, celle-ci a été calculée à partir des données du BSO, avec les règles de décision suivantes : 
+
+- lorsque les APC proviennent des données DOAJ (`apc_source == 'doaj'`) et que le montant est nul (pas d'APC payés), alors la variable prend la valeur **diamond** ;
+- lorsque les APC proviennent des données DOAJ et que le montant n'est pas nul (des APC ont été payés), alors la variable prend la valeur **gold** ;
+- en groupant les données par journal et par année, lorsque des APC ont été payés au moins pour un article de ce journal et cette année, alors la variable prend la valeur **hybrid** ;
+- en groupant les données par journal et par année, lorsqu'aucun APC n'a été payé pour les articles de ce journal et cette année, alors la variable prend la valeur **subscription**.
+ 
+N'étant pas certains de la qualité de la variable créée, une seconde variable de couleur de journal a été construite à partir de données externes, nous expliquons les étapes de sa création ci-dessous. 
+
+<br>
+
+
+|        <font size="5">&rarr; À partir de données externes</font>
+
+<br>
+
+
+La variable '***journal_color_doaj***' correspond elle aussi au statut libre accès du journal, mais celle-ci a été construite directement à partir des [données DOAJ](https://doaj.org/docs/public-data-dump/). On trouve effectivement, sur leur plate-forme internet, des données listant tous les journaux du DOAJ, en précisant si des APC sont payés ou non. Ces dernières ont été récupérées au format JSON à la date du 19 mars, et ont permis de créer la variable '***journal_color_doaj***' en plusieurs étapes : 
+
+- à partir de la base extraite de leur plate-forme, ne garder que les variables d'ISSN (ISSN print et e-ISSN), la variable informant si des APC sont payés (has_apc), et en créer une qui prend toujours la valeur 1 pour informer que le journal est dans les données DOAJ (*is_in_doaj*) ;
+- joindre ces données avec la base du BSO par l'ISSN (tous les journaux du DOAJ ont un ISSN correspondant, donc il n'est pas utile de matcher par le **nom de journal**) ; 
+- créer la nouvelle variable '***journal_color_doaj***' avec la règle de décision suivante : 
+
+    + lorsque le journal est dans les données DOAJ (is_in_doaj = 1) et que la variable 'has_apc' des données externes prend la valeur '0', alors la variable créée prend la valeur **diamond** ;
+    + lorsque le journal est dans les données DOAJ (is_in_doaj = 1) et que la variable 'has_apc' des données externes prend la valeur '1', alors la variable créée prend la valeur **gold** ;
+    
+- supprimer les variables intermédiaires qui servaient uniquement à la création de la variable '***journal_color_doaj***' : is_in_doaj et has_apc.
+
+
+La création de cette variable porte uniquement sur les couleurs 'diamond' et 'gold' puisque son objectif est de comparer la fiabilité des données ayant comme source APC 'doaj', c'est pour cela qu'aucune règle de décision n'est appliquée pour les couleurs 'hybrid' et 'subscription'. 
+
+<br>
+
+
+La variable '***journal_color_qoam***' correspond elle aussi au statut libre accès du journal, mais celle-ci a été construite à partir des [données QOAM](https://www.qoam.eu/about) transmises par L.Waayers à la date du 4 mai, qui listent 44.000 journaux issus de Journal TOCS - une autre base de données de journaux. Celles-ci ont permis de construire la variable '***journal_color_qoam***' avec la règle de décision suivante : 
+
+- lorsque le journal est en accès fermé (pas d'open access), alors la variable créée prend la valeur **hybrid** ;
+- lorsque le journal est en accès ouvert et qu'il est sans frais, alors la variable créée prend la valeur **diamond** ;
+- lorsque le journal est en accès ouvert et qu'il inclut des frais, alors la variable créée prend la valeur **gold**.
+    
+
+
+<br>
+
+
+
+La variable '***is_covered_by_couperin***' est une variable booléenne qui prend la valeur *1* si le journal est couvert par les accords Couperin, *0* sinon. Celle-ci a été construite à partir de données Couperin transmises par V.Larroque, listant toutes les revues couvertes par le consortium. Les étapes ont été les suivantes : 
+
+- import des données transmises (6 feuilles Excel au total), sélection des variables à garder (**ISSNs** et **titre** pour les journaux sans ISSN), création de la variable '***is_covered_by_couperin***' qui prend toujours la valeur 1 et harmonisation des noms de colonnes qui diffèrent d'une feuille de classeur à une autre ; 
+- regroupement des 6 bases en une seule, puis jointure avec les données du BSO en 3 temps :
+
+    + sur l'ISSN print dans un premier temps ;
+    + sur l'e-ISSN dans un deuxième temps (en filtrant sur les journaux qui n'ont pas d'ISSN print) ;
+    + sur le nom du journal dans un troisième temps (en filtrant sur les journaux qui n'ont aucun ISSN).
+
+<br>
+
+
+<style>
+div.blue { background-color:#efefef; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+ <FONT COLOR="#333333">**Une précision**
+
+Dans les données du BSO, deux colonnes contiennent l'ISSN des journaux : l'une ne contient que l'ISSN préféré (toujours 1 valeur) et l'autre contient tous les ISSNs correspondant à un journal (ils sont alors listés à la suite et séparés par des virgules). Cette seconde variable étant plus exhaustive, c'est elle qui a servi de clé de jointure pour ajouter les données des journaux externes (DOAJ et Couperin). Pour cela il a d'abord fallu séparer les ISSNs sur plusieurs lignes lorsque plusieurs ISSNs sont disponibles pour un journal, en dupliquant les autres champs. Il a ensuite été possible de joindre les données externes, d'appliquer les règles de décision pour la création des variables, puis de remettre les ISSNs en une ligne en collant les différentes valeurs à la suite, séparées par des virgules.
+
+De cette manière, un journal ayant 2 ISSNs peut être joint 2 fois avec les données externes, et peut donc contenir 2 fois sa couleur (ex: '*gold,gold*'). Un travail d'agrégation des valeurs a ainsi été fait, après avoir remis les données sur une ligne correspondant à un article (ex: '*gold,gold*' est transformé en '*gold*').
+
+</div>
+
+<br> 
+
+<br> 
+
+Les variables '***part_APC_paid_by_couperin***' et '***part_APC_paid_by_authors***' correspondent respectivement au pourcentage des APC payés par Couperin et ceux payés par les auteurs ou leurs institutions. Celles-ci ont été construites à partir de données Couperin transmises par V.Larroque, intitulés "EDP_données_2017-2020.xlsx" et "Elsevier_ArticlesOA_2019-2021.xlsx". Les étapes ont été les suivantes :
+
+- import des données transmises (2 fichiers différents)
+- sélection des variables de DOI, de manière à ne garder qu'une liste des publications concernées par les montants négociés
+- création des variables '***part_APC_paid_by_couperin***' et '***part_APC_paid_by_authors***' qui prennent les mêmes valeurs pour tous les DOIs d'une base :
+
+    + pour les données de l'EDP, la variable '***part_APC_paid_by_couperin***' prend la valeur "1" (pour 100%) et la variable '***part_APC_paid_by_authors***' prend la valeur "0" ;
+    + pour les données Elsevier, la variable '***part_APC_paid_by_couperin***' prend la valeur "0.25" (pour 25%) et la variable '***part_APC_paid_by_authors***' prend la valeur "0.75".
+
+- jointure avec les données du BSO par l'identifiant du DOI.
+
+
+<br>
+
+Les variables '***is_french_CA_wos***' et '***is_non_french_CA_wos***' sont des variables booléennes qui indiquent respectivement s'il y a un auteur correspondant français, et s'il y a un auteur correspondant étranger par article. Celles-ci ont été construites à partir de données du Web of Science transmises par D.Besagni, qui correspondent à une extraction d'un appel à API réalisé entre le 28 mars et le 15 avril 2022, listant tous les auteurs d'une publication, ainsi que leur(s) affiliation(s). Les données récupérées étaient au format XML et concernaient 1.242.560 DOIs/notices, répartis en 1243 sous-fichiers. Les étapes suivantes ont été suivies pour traiter les données : 
+
+- import des fichiers sous python, premier traitement : 
+
+    + récupérer la liste des DOIs (imbriqué dans le parent 'dynamic_data')
+    + dans l'objet 'address_name' (du parent 'static_data'), récupérer les champs suivants dès lors que `reprint='Y'`, i.e. auteur correspondant :
+        - le champ *full_address* (le nom de l'affiliation de l'auteur)
+        - le pays de cette affiliation (champ *country*)
+        - le champs *full_name* (le nom de l'auteur)
+    + mettre les variables récupérées dans une base extraite de python au format CSV
+    
+- import de cette base créée sous R, second traitement : 
+
+    + nettoyage des données (suppression de doublons)
+    + création des variables '***is_french_CA_wos***' et '***is_non_french_CA_wos***' avec les règles de décision suivantes, après avoir groupé les données par DOI : 
+        - 'is_french_CA_wos' prend la valeur "1" lorsqu'au moins 1 auteur correspondant est français (`any(country_eta == "France")`), et "0" lorsque tous les auteurs correspondant ne sont pas français et qu'ils sont connus (`country_eta != "unknown_by_WOS" & all(country_eta != "France")`)
+        - 'is_non_french_CA_wos' prend la valeur "1" lorsqu'aucun auteur correspondant n'est français mais il est connu (`country_eta != "unknown_by_WOS" & any(country_eta != "France")`), et "0" lorsque tous les auteurs correspondant sont français (`all(country_eta == "France")`)
+    + jointure avec les données du BSO par la variable du DOI
+
+<br>
+
+3 combinaisons des variables créées sont ainsi possibles : 
+
+- les deux prennent la valeur "1" : il y a au moins 2 auteurs correspondant dont 1 français ;
+- la première prend la valeur "1" et la seconde la valeur "0" : il n'y a que des auteurs correspondant français ;
+- la première prend la valeur "0" et la seconde la valeur "1" : il n'y a que des auteurs correspondant étrangers.
+
+
+
+<br>
+
+La variable '***is_french_CA_openalex***' est une variable booléenne qui indique aussi si l'auteur correspondant est français. Celle-ci a été construite à partir des [données OpenAlex](https://docs.openalex.org/about-the-data/work) au niveau des articles ("Works"), récupérées par appels d'API. Les étapes suivantes ont été suivies pour construire cette variable :
+
+- création d'un objet contenant tous les DOIs du BSO n'ayant pas d'informations sur la nationalité de l'auteur correspondant, et n'étant pas écrits en français (cela concerne 126.772 articles) ;
+- requêtes de l'API OpenAlex pour récupérer les données des 126.772 articles du BSO mis de côté ;
+- parmi les données récupérées depuis OpenAlex, sélection des variables listant tous les auteurs d'une publication ainsi que leur pays d'affiliation ;
+- création de la variable '***is_french_CA_openalex***' avec la règle de décision suivante, après avoir groupé les données par DOI : 
+
+    + 'is_french_CA_openalex' prend la valeur "1" lorsque tous les auteurs ont une affiliation française, et "0" lorsqu'aucun auteur n'a d'affiliation française (pour ces 2 cas on ne conclu que lorsque **toutes** les affiliations de **tous** les auteurs sont connues).
+    
+- jointure avec les données du BSO par la variable du DOI.
+
+<br>
+
+La variable '***is_french_CA_bso_wos_openalex_single_lang***' est la variable booléenne finale, qui indique si l'auteur correspondant est français. Elle est la combinaison des variables '***is_french_CA***', '***is_french_CA_wos***', '***is_french_CA_openalex***', '***nb_authors***' et '***lang***'. Chaque étape de construction correspondant à une source de données différente, des variables intermédiaires ont été créées, telles que : 
+
+- '***is_french_CA_bso_wos***' : qui prend la valeur "1" lorsque '*is_french_CA*' ou '*is_french_CA_wos*' prend la valeur "1", et "0" lorsque l'une des 2 variables prend la valeur "0", et que l'autre est manquante ou différente de 1 ;
+- '***is_french_CA_bso_wos_openalex***' : qui prend la valeur "1" lorsque '*is_french_CA_bso_wos*' prend la valeur "1" ou lorsque celle-ci est manquante et que la variable '*is_french_CA_openalex*' prend la valeur "1", et "0" lorsque '*is_french_CA_bso_wos*' prend la valeur "0" ou lorsque celle-ci est manquante et que la variable '*is_french_CA_openalex*' prend la valeur "0" ;
+- '***is_french_CA_bso_wos_openalex_single***' : qui prend la valeur "1" lorsque '*is_french_CA_bso_wos_openalex*' prend la valeur "1" ou lorsque celle-ci est manquante et que la variable '*nb_authors*' prend la valeur "1" (un seul auteur qui est alors nécessairement l'auteur correspondant, dans des données où les articles sont écrits au moins pas un auteur français), et "0" lorsque '*is_french_CA_bso_wos_openalex*' prend la valeur "0" ;
+
+
+La variable finale '***is_french_CA_bso_wos_openalex_single_lang***' suit donc la règle de décision suivante : 
+
+- 'is_french_CA_bso_wos_openalex_single_lang' prend la valeur "1" dans les cas de figure suivants : 
+
+    + lorsque les variables 'is_french_CA' ou 'is_french_CA_wos' prennent la valeur "1"
+    + lorsque ces deux dernières sont manquantes et que la variable 'is_french_CA_openalex' prend la valeur "1"
+    + lorsque ces dernières sont manquantes et que l'article est rédigé par un seul auteur
+    + lorsque ces deux dernières sont manquantes et que l'article est rédigé en français (lang == "fr")
+    
+- 'is_french_CA_bso_wos_openalex_single_lang' prend la valeur "0" dans les cas de figure suivants : 
+
+    + lorsque l'une des 2 variables 'is_french_CA' et 'is_french_CA_wos' prend la valeur "0", et que l'autre est manquante ou différente de 1
+    + lorsque ces deux dernières sont manquantes et que la variable 'is_french_CA_openalex' prend la valeur "0"
+
+
+
+<br>
+
+La variable '***apc_has_been_paid***' est une variable booléenne qui indique si un APC a été payé pour l'article concerné. Celle-ci a aussi été construite à partir des [données OpenAlex](https://docs.openalex.org/about-the-data/work) au niveau des articles ("Works"), récupérées par appels d'API. Les étapes suivantes ont été suivies pour construire cette variable :
+
+- création d'un objet contenant tous les DOIs du BSO ayant théoriquement un APC payé (*has_apc == 1*) (cela concerne 278.507 articles) ;
+- requêtes de l'API OpenAlex pour récupérer les données des 278.507 articles du BSO mis de côté ;
+- parmi les données récupérées depuis OpenAlex, sélection de la variable indiquant le statut Open Access de l'article (*oa_status*) ;
+- création de la variable '***apc_has_been_paid***' avec la règle de décision suivante : 
+
+    + 'apc_has_been_paid' prend la valeur "1" lorsque le statut OA est "gold" ou "hybrid" (`oa_color_openalex == "gold" | oa_color_openalex == "hybrid"`), et "0" dans les autres cas, c'est-à-dire où le statut OA est "bronze", "closed" ou "green".
+    
+- jointure avec les données du BSO par la variable du DOI.
+
+La variable récupérée via l'API "*oa_color_openalex*", est elle aussi jointe pour enrichir les données du BSO.
+
+<br>
+
+
+
+## IV - Observation des données
+
+<br>
+
+### Les données{.tabset}
+
+```{r fonctions et libraries}
+# Libraries
+packages = c("tidyverse", "jsonlite", "kableExtra", "DT", "knitr", "glue", "plotly", "hrbrthemes", "viridis", "janitor")
+
+## Installation des packages si besoin et chargement des librairies
+package.check <- lapply(
+  packages,
+  FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  }
+)
+
+
+### Fonction d'import et afficher les 100 premières observations
+
+import_manips <- function(year){
+    
+    # Import des données
+    start_time <- Sys.time()
+    data <- read_csv(glue("../data/4.process/managing-variables_2nd-part/final_bso_{year}.csv"), col_types = cols(author_position = "c"), na = c("", "NA"))
+    end_time <- Sys.time()
+    
+    # as.factor
+    data[,c("has_apc", "tier", "is_covered_by_couperin", "is_complete_affiliation", "is_french_CA", "is_french_CA_wos", "is_french_CA_openalex", "is_at_least_one_french_author2", "part_APC_paid_by_couperin", "part_APC_paid_by_authors", "is_french_CA_bso_wos_openalex")] <- sapply(data[,c("has_apc", "tier", "is_covered_by_couperin", "is_complete_affiliation", "is_french_CA", "is_french_CA_wos", "is_french_CA_openalex", "is_at_least_one_french_author2", "part_APC_paid_by_couperin", "part_APC_paid_by_authors", "is_french_CA_bso_wos_openalex")], as.factor)
+
+    # Configuration du temps d'exécution de la commande
+    import_time <- end_time - start_time
+    import_time <- paste(round(as.numeric(import_time, units.difftime(import_time)),2), units.difftime(import_time))
+    
+    # Sauvegarde des objets dans environnement
+    assign(glue("bso_{year}"), data, envir = .GlobalEnv)
+    assign("data", data, envir = .GlobalEnv)
+    assign("import_time", import_time, envir = .GlobalEnv)
+}
+
+
+n_100_kable <- function(data){
+    
+    kable(data[c(1:100),], format = "html") %>% 
+      kable_styling(bootstrap_options = c("striped", "hover"), 
+                    full_width = T, 
+                    font_size = 9, 
+                    fixed_thead = TRUE,  #fix headers when scrolling 
+                    html_font = "sans-serif") %>% 
+      scroll_box(width = "100%", height = "600px")
+}
+```
+
+
+#### 2013
+
+```{r}
+import_manips(2013)
+```
+
+
+**Temps d'exécution de l'import des données** : `r import_time`.
+
+**Dimensions du jeu de données** : `r nrow(data)` observations et `r ncol(data)` variables (1 ligne = 1 article).
+
+**Les 100 premières observations** :
+
+```{r}
+n_100_kable(data)
+```
+
+<br>
+
+
+
+
+
+
+#### 2014
+
+```{r}
+import_manips(2014)
+```
+
+
+**Temps d'exécution de l'import des données** : `r import_time`.
+
+**Dimensions du jeu de données** : `r nrow(data)` observations et `r ncol(data)` variables (1 ligne = 1 article).
+
+**Les 100 premières observations** :
+
+```{r}
+n_100_kable(data)
+```
+
+<br>
+
+
+
+#### 2015
+
+```{r}
+import_manips(2015)
+```
+
+
+**Temps d'exécution de l'import des données** : `r import_time`.
+
+**Dimensions du jeu de données** : `r nrow(data)` observations et `r ncol(data)` variables (1 ligne = 1 article).
+
+**Les 100 premières observations** :
+
+```{r}
+n_100_kable(data)
+```
+
+<br>
+
+
+
+#### 2016
+
+```{r}
+import_manips(2016)
+```
+
+
+**Temps d'exécution de l'import des données** : `r import_time`.
+
+**Dimensions du jeu de données** : `r nrow(data)` observations et `r ncol(data)` variables (1 ligne = 1 article).
+
+**Les 100 premières observations** :
+
+```{r}
+n_100_kable(data)
+```
+
+<br>
+
+
+
+#### 2017
+
+```{r}
+import_manips(2017)
+```
+
+
+**Temps d'exécution de l'import des données** : `r import_time`.
+
+**Dimensions du jeu de données** : `r nrow(data)` observations et `r ncol(data)` variables (1 ligne = 1 article).
+
+**Les 100 premières observations** :
+
+```{r}
+n_100_kable(data)
+```
+
+<br>
+
+
+
+#### 2018
+
+```{r}
+import_manips(2018)
+```
+
+
+**Temps d'exécution de l'import des données** : `r import_time`.
+
+**Dimensions du jeu de données** : `r nrow(data)` observations et `r ncol(data)` variables (1 ligne = 1 article).
+
+**Les 100 premières observations** :
+
+```{r}
+n_100_kable(data)
+```
+
+<br>
+
+
+
+#### 2019
+
+```{r}
+import_manips(2019)
+```
+
+
+**Temps d'exécution de l'import des données** : `r import_time`.
+
+**Dimensions du jeu de données** : `r nrow(data)` observations et `r ncol(data)` variables (1 ligne = 1 article).
+
+**Les 100 premières observations** :
+
+```{r}
+n_100_kable(data)
+```
+
+<br>
+
+
+
+#### 2020
+
+```{r}
+import_manips(2020)
+```
+
+
+**Temps d'exécution de l'import des données** : `r import_time`.
+
+**Dimensions du jeu de données** : `r nrow(data)` observations et `r ncol(data)` variables (1 ligne = 1 article).
+
+**Les 100 premières observations** :
+
+```{r}
+n_100_kable(data)
+```
+
+<br>
+
+
+
+### Valeurs manquantes{.tabset}
+
+
+```{r}
+# Fonction NA
+table_na <- function(data){
+    
+    data <- data %>% ungroup()
+    
+    # Volume et part NA par variable
+    nb_NA <- as.data.frame(apply(is.na(data), 2, sum)) %>% 
+                           rename(`nombre de NA` = `apply(is.na(data), 2, sum)`) %>%
+                           mutate(pourcentage = `nombre de NA`/nrow(data)*100) %>% 
+                           mutate(pourcentage = paste(round(pourcentage, 2), "%", sep = " ")) %>% 
+                           arrange(desc(pourcentage))
+    nb_NA %>% datatable(options = list(pageLength = 20, searching = F), width = '60%')
+}
+```
+
+
+#### 2013
+
+```{r}
+table_na(bso_2013)
+```
+
+
+<br>
+
+
+#### 2014
+
+```{r}
+table_na(bso_2014)
+```
+
+
+<br>
+
+
+#### 2015
+
+```{r}
+table_na(bso_2015)
+```
+
+
+<br>
+
+
+#### 2016
+
+```{r}
+table_na(bso_2016)
+```
+
+
+<br>
+
+
+#### 2017
+
+```{r}
+table_na(bso_2017)
+```
+
+
+<br>
+
+
+#### 2018
+
+```{r}
+table_na(bso_2018)
+```
+
+
+<br>
+
+
+#### 2019
+
+```{r}
+table_na(bso_2019)
+```
+
+
+<br>
+
+
+#### 2020
+
+```{r}
+table_na(bso_2020)
+```
+
+
+<br>
+
+
+
+### Statistiques générales{.tabset}
+
+
+```{r}
+# Fonction NA
+global_stats <- function(data){
+
+    # Sous df sans les variables qui prennent trop de valeurs différentes et ralentissent le knit du rapport
+    data <- data %>% select(-c("doi", "year", "journal_issns","journal_issn_l","journal_name", "name", "author_position", "email"))
+        
+    # Summarytools
+    summarytools::dfSummary(data, style = "grid", graph.magnif = 0.75, valid.col = FALSE, tmp.img.dir = "/tmp", max.tbl.height = 800, headings=FALSE, method = "render")
+}
+```
+
+
+#### 2013
+
+```{r}
+global_stats(bso_2013)
+```
+
+
+<br>
+
+
+#### 2014
+
+```{r}
+global_stats(bso_2014)
+```
+
+
+<br>
+
+
+#### 2015
+
+```{r}
+global_stats(bso_2015)
+```
+
+
+<br>
+
+
+#### 2016
+
+```{r}
+global_stats(bso_2016)
+```
+
+
+<br>
+
+
+#### 2017
+
+```{r}
+global_stats(bso_2017)
+```
+
+
+<br>
+
+
+#### 2018
+
+```{r}
+global_stats(bso_2018)
+```
+
+
+<br>
+
+
+#### 2019
+
+```{r}
+global_stats(bso_2019)
+```
+
+
+<br>
+
+
+#### 2020
+
+```{r}
+global_stats(bso_2020)
+```
+
+
+<br>
+
+
+
+### Quelques graphiques{.tabset}
+
+
+```{r}
+# Fonction pour la distribution des APC
+distrib_apc <- function(data){
+    
+  graph <- data %>% ggplot() +
+  aes(x = amount_apc_openapc_EUR) +
+  geom_histogram(bins = 30L, fill = "#112446", alpha = 0.9, col = "white") +
+  labs(x = "Montant des APC",
+    y = "Fréquence",
+    title = "Distribution du montant des APC") +
+  hrbrthemes::theme_ipsum()
+  ggplotly(graph)  
+}
+
+
+# Fonction pour les 10 langues les plus utilisées dans les articles
+top10_lang <- function(data){
+    
+    # Table du nombre d'articles par langue
+    table <- data %>% group_by(lang) %>% filter(!is.na(lang)) %>% summarise(Freq = n())
+    table <- table %>% top_n(10, Freq)
+    
+    # Graphique
+    graph <- table %>% 
+        mutate(lang = fct_reorder(lang, Freq)) %>%
+        ggplot(aes(x = lang, y = Freq)) +
+      geom_bar(stat="identity", fill = "#112446") +
+      coord_flip() + 
+      labs(
+        x = "Langue",
+        y = "Nombre d'articles",
+        title = "Les 10 langues les plus utilisées dans les articles",
+      ) +
+      theme_ipsum()
+    ggplotly(graph) 
+}
+```
+
+
+#### 2013
+
+
++ **Distribution des APC**
+
+```{r}
+distrib_apc(bso_2013)
+```
+
+
++ **Les 10 langues les plus utilisées**
+
+```{r}
+top10_lang(bso_2013)
+```
+
+
+<br>
+
+
+
+#### 2014
+
+
++ **Distribution des APC**
+
+```{r}
+distrib_apc(bso_2014)
+```
+
+
++ **Les 10 langues les plus utilisées**
+
+```{r}
+top10_lang(bso_2014)
+```
+
+
+<br>
+
+
+
+#### 2015
+
+
++ **Distribution des APC**
+
+```{r}
+distrib_apc(bso_2015)
+```
+
+
++ **Les 10 langues les plus utilisées**
+
+```{r}
+top10_lang(bso_2015)
+```
+
+
+<br>
+
+
+
+#### 2016
+
+
++ **Distribution des APC**
+
+```{r}
+distrib_apc(bso_2016)
+```
+
+
++ **Les 10 langues les plus utilisées**
+
+```{r}
+top10_lang(bso_2016)
+```
+
+
+<br>
+
+
+
+#### 2017
+
+
++ **Distribution des APC**
+
+```{r}
+distrib_apc(bso_2017)
+```
+
+
++ **Les 10 langues les plus utilisées**
+
+```{r}
+top10_lang(bso_2017)
+```
+
+
+<br>
+
+
+
+#### 2018
+
+
++ **Distribution des APC**
+
+```{r}
+distrib_apc(bso_2018)
+```
+
+
++ **Les 10 langues les plus utilisées**
+
+```{r}
+top10_lang(bso_2018)
+```
+
+
+<br>
+
+
+
+#### 2019
+
+
++ **Distribution des APC**
+
+```{r}
+distrib_apc(bso_2019)
+```
+
+
++ **Les 10 langues les plus utilisées**
+
+```{r}
+top10_lang(bso_2019)
+```
+
+
+<br>
+
+
+
+#### 2020
+
+
++ **Distribution des APC**
+
+```{r}
+distrib_apc(bso_2020)
+```
+
+
++ **Les 10 langues les plus utilisées**
+
+```{r}
+top10_lang(bso_2020)
+```
+
+
+
+<br>
+
+
+
+## V - Investigation des données
+
+<br>
+
+```{r}
+# Import des données rassemblées
+whole_bso <- read_csv("../data/4.process/managing-variables_2nd-part/whole_bso.csv", col_types = cols(author_position = "c"), na = c("", "NA"))
+
+# Format factor variables
+whole_bso[,c("has_apc", "tier", "is_covered_by_couperin", "is_complete_affiliation", "is_french_CA", "is_french_CA_wos", "is_french_CA_openalex", "is_at_least_one_french_author2", "part_APC_paid_by_couperin", "part_APC_paid_by_authors", "is_french_CA_bso_wos_openalex")] <- sapply(whole_bso[,c("has_apc", "tier", "is_covered_by_couperin", "is_complete_affiliation", "is_french_CA", "is_french_CA_wos", "is_french_CA_openalex", "is_at_least_one_french_author2", "part_APC_paid_by_couperin", "part_APC_paid_by_authors", "is_french_CA_bso_wos_openalex")], as.factor)
+```
+
+Pour cette cinquième partie nous regroupons les **8 années dans une même base**, qui contient ainsi `r ncol(whole_bso)` variables et `r ncol(whole_bso)` observations, c'est-à-dire articles.
+
+Sur cette base au niveau des articles, les sources des APC sont les suivantes : 
+
+```{r}
+# On affiche les sources des APC
+table <- whole_bso %>% group_by(apc_source) %>% summarise(frequence = n()) %>% mutate(pourcentage = paste(round(frequence/sum(frequence)*100,2), "%"))
+kable(table, format = "html") %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = F, 
+                html_font = "sans-serif")
+```
+
+<br>
+
+Les sources des APC seulement pour les articles de journaux "gold" ou "hybrid", sont les suivantes (articles filtrés à partir de la variable '*journal_color*' créées à partir des données du BSO) : 
+
+```{r}
+# On affiche les sources des APC
+table <- whole_bso %>% filter(journal_color == "gold" | journal_color == "hybrid") %>% group_by(apc_source) %>% summarise(frequence = n()) %>% mutate(pourcentage = paste(round(frequence/sum(frequence)*100,2), "%"))
+kable(table, format = "html") %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = F, 
+                html_font = "sans-serif")
+```
+
+<br>
+
+Idem mais le filtre a été appliqué sur la variable de meilleure qualité '*oa_color_article_BSO*' qui correspond à '*oa_details.2020.oa_colors_with_priority_to_publisher*' agregée. 
+
+```{r}
+# On affiche les sources des APC
+table <- whole_bso %>% filter(oa_details.2020.oa_colors_with_priority_to_publisher == "gold" | oa_details.2020.oa_colors_with_priority_to_publisher == "hybrid") %>% group_by(apc_source) %>% summarise(frequence = n()) %>% mutate(pourcentage = paste(round(frequence/sum(frequence)*100,2), "%"))
+kable(table, format = "html") %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = F, 
+                html_font = "sans-serif")
+```
+
+<br>
+
+Sur cette base au niveau des articles, le nombre de valeurs manquantes pour la variable '*amount_apc_EUR*' est le suivant - distingué par année : 
+
+```{r}
+# On affiche le nombre de NA
+table <- whole_bso %>% filter(is.na(amount_apc_EUR)) %>% group_by(year) %>% summarise(frequence = n()) %>% mutate(pourcentage = paste(round(frequence/sum(frequence)*100,2), "%"))
+kable(table, format = "html") %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"), 
+                full_width = F, 
+                html_font = "sans-serif")
+```
+
+<br>
+
+### Croisement has_apc avec les variables catégorielles{.tabset}
+
+Cette section croise la variable 'has_apc' avec les variables catégorielles de la base de données, dans le but de **trouver des patterns** pour comprendre de quoi dépend le fait que des APC aient été payés ou non.
+
+
+```{r}
+# function
+cross_has_apc <- function(group) {
+
+      # Table de fréquences
+    table <- whole_bso %>% group_by(has_apc) %>% count(get(group)) %>% mutate(percent = round(n/sum(n)*100,2)) %>% rename(variable = `get(group)`)
+    table[,c(1,2)] <- sapply(table[,c(1,2)], as.character)
+    table <- table %>% na.omit()
+
+        # Graphique
+    graph <- table %>% ggplot(aes(fill = factor(has_apc, levels = c("1","0")), y = n, x = variable,
+                                  text = paste("has_apc:", has_apc,
+                                               "\n", group, ":", variable,
+                                               "\nNombre d'articles:", n, 
+                                               "\nPourcentage:", percent, "%"))) + 
+        geom_bar(position="stack", stat="identity") +
+        scale_fill_viridis(discrete = T, name = "has_apc", option = "E", direction = -1) +
+        theme_ipsum() + coord_flip() +
+        xlab(group) + ylab("Nombre d'articles") + ggtitle(paste("APC payés (has_apc) selon\n", group, sep = " ")) +
+        theme(axis.title.y = element_text(size=12), 
+              axis.title.x = element_text(size=12)) 
+    ggplotly(graph, tooltip = c("text")) 
+}
+```
+
+
+#### is_covered_by_couperin
+
+```{r}
+cross_has_apc("is_covered_by_couperin")
+```
+
+
+
+#### year
+
+```{r}
+cross_has_apc("year")
+```
+
+
+
+#### tier
+
+```{r}
+cross_has_apc("tier")
+```
+
+
+
+#### bso_classification
+
+```{r}
+cross_has_apc("bso_classification")
+```
+
+
+#### journal_color
+
+```{r}
+cross_has_apc("journal_color")
+```
+
+
+
+#### oa_details.2020.is_oa
+
+```{r}
+cross_has_apc("oa_details.2020.is_oa")
+```
+
+
+
+#### oa_details.2020.journal_is_in_doaj
+
+```{r}
+cross_has_apc("oa_details.2020.journal_is_in_doaj")
+```
+
+
+
+#### oa_details.2020.journal_is_oa
+
+```{r}
+cross_has_apc("oa_details.2020.journal_is_oa")
+```
+
+
+
+#### oa_details.2020.oa_host_type
+
+```{r}
+cross_has_apc("oa_details.2020.oa_host_type")
+```
+
+
+
+#### oa_details.2020.oa_colors
+
+```{r}
+cross_has_apc("oa_details.2020.oa_colors")
+```
+
+
+
+#### oa_details.2020.oa_colors_with_priority_to_publisher
+
+```{r}
+cross_has_apc("oa_details.2020.oa_colors_with_priority_to_publisher")
+```
+
+
+
+
+
+#### oa_details.2020.licence_publisher
+
+```{r}
+cross_has_apc("oa_details.2020.licence_publisher")
+```
+
+
+
+
+
+
+### Croisement amount_apc_EUR avec les variables catégorielles{.tabset}
+
+Cette section croise la variable 'amount_apc_EUR' avec les variables catégorielles de la base de données, dans le but de **trouver la variable la plus discriminante**, c'est-à-dire où les distributions d'une catégorie à une autre sont les plus hétérogènes possible. 
+
+```{r}
+# function
+cross_amount_apc <- function(group) {
+
+        # Graphique
+    graph <- whole_bso %>% filter(!is.na(amount_apc_EUR)) %>% ggplot(aes(x = amount_apc_EUR)) +
+      geom_histogram(bins = 30L, fill = "#112446") +
+      labs(x = group, y = "Nombre d'articles", title = paste("Montant des APC (amount_apc_EUR) selon\n", group, sep = " ")) +
+      theme_ipsum() +
+      facet_wrap(vars(get(group)), scales='fixed') +
+      theme(axis.title.y = element_text(size=12), axis.title.x = element_text(size=12))
+    ggplotly(graph)
+}
+```
+
+
+#### is_covered_by_couperin
+
+```{r}
+cross_amount_apc("is_covered_by_couperin")
+```
+
+
+
+#### year
+
+```{r}
+cross_amount_apc("year")
+```
+
+
+
+#### tier
+
+```{r}
+cross_amount_apc("tier")
+```
+
+
+
+#### bso_classification
+
+```{r}
+cross_amount_apc("bso_classification")
+```
+
+
+#### journal_color
+
+```{r}
+cross_amount_apc("journal_color")
+```
+
+
+
+#### oa_details.2020.is_oa
+
+```{r}
+cross_amount_apc("oa_details.2020.is_oa")
+```
+
+
+
+#### oa_details.2020.journal_is_in_doaj
+
+```{r}
+cross_amount_apc("oa_details.2020.journal_is_in_doaj")
+```
+
+
+
+#### oa_details.2020.journal_is_oa
+
+```{r}
+cross_amount_apc("oa_details.2020.journal_is_oa")
+```
+
+
+
+#### oa_details.2020.oa_host_type
+
+```{r}
+cross_amount_apc("oa_details.2020.oa_host_type")
+```
+
+
+
+#### oa_details.2020.oa_colors
+
+```{r}
+cross_amount_apc("oa_details.2020.oa_colors")
+```
+
+
+
+#### oa_details.2020.oa_colors_with_priority_to_publisher
+
+```{r}
+cross_amount_apc("oa_details.2020.oa_colors_with_priority_to_publisher")
+```
+
+
+
+
+
+#### oa_details.2020.licence_publisher
+
+```{r}
+cross_amount_apc("oa_details.2020.licence_publisher")
+```
+
+
+
+
+### Quelques réponses aux questions en suspens
+
+<br>
+
++ **Quel est le pourcentage d'articles avec au moins une affiliation manquante ?**
+
+Sur les `r nrow(whole_bso)` articles des 8 années, `r whole_bso %>% filter(is_complete_affiliation == 0) %>% nrow()` articles ont au moins une affiliation manquante (`is_complete_affiliation == 0`) - soit `r round(whole_bso %>% filter(is_complete_affiliation == 0) %>% nrow() / nrow(whole_bso) *100, 2)`%.
+
+<br>
+
+
++ **Tous les articles de la base sont-ils écrits par au moins un auteur français ?**
+
+Théoriquement tous les articles de la base sont écrits au moins par un auteur français. Pour vérifier cette hypothèse nous regardons les fréquences de la variable '***is_at_least_one_french_author***'. Sur les `r nrow(whole_bso)` articles des 8 années confondues, il y a :  
+
+- il y a `r whole_bso %>% filter(is_at_least_one_french_author2 == 1) %>% nrow()` articles écrits au moins par 1 auteur français, soit `r round(whole_bso %>% filter(is_at_least_one_french_author2 == 1) %>% nrow() / nrow(whole_bso) *100, 2)`% ;
+- il y a `r whole_bso %>% filter(is_at_least_one_french_author2 == 0) %>% nrow()` articles dont toutes les affiliations sont connues mais où aucune n'est française, c'est-à-dire que les articles n'ont été rédigés par aucun auteur français, soit `r round(whole_bso %>% filter(is_at_least_one_french_author2 == 0) %>% nrow() / nrow(whole_bso) *100, 2)`% ;
+- il y a `r whole_bso %>% filter(is.na(is_at_least_one_french_author2)) %>% nrow()` articles pour lesquels nous ne connaissons pas **toutes** les affiliations (et qu'il n'y en a pas au moins 1 française), donc pour lesquels nous ne pouvons tirer de conclusion, soit `r round(whole_bso %>% filter(is.na(is_at_least_one_french_author2)) %>% nrow() / nrow(whole_bso) *100, 2)`%.
+
+<br>
+
++ **Quel est le ratio du nombre d'articles avec l'auteur correspondant français, sur le nombre d'articles ayant au moins un auteur français ?**
+
+Sur les `r nrow(whole_bso)` articles des 8 années, il y a `r whole_bso %>% filter(is_french_CA == 1) %>% nrow()` articles avec un auteur correspondant français sur `r whole_bso %>% filter(is_at_least_one_french_author2 == 1) %>% nrow()` articles écrit par au moins 1 auteur français. Le ratio est donc de `r round(whole_bso %>% filter(is_french_CA == 1) %>% nrow() / whole_bso %>% filter(is_at_least_one_french_author2 == 1) %>% nrow(), 2)`.
+
+<br>
+
++ **Quel est la distribution du nombre d'auteurs pour 1 article, par discipline ?**
+
+```{r}
+# Graphique
+graph <- whole_bso %>% filter(!is.na(nb_authors)) %>% ggplot(aes(x = nb_authors)) +
+   geom_histogram(bins = 70L, fill = "#112446") +
+   labs(x = "Nombre d'auteurs", y = "Nombre d'articles", title = "Distribution du nombre d'auteurs, selon la discipline 
+        de l'article") +
+   theme_ipsum() +
+   facet_wrap(vars(bso_classification), scales='fixed') +
+   theme(axis.title.y = element_text(size=12), 
+         axis.title.x = element_text(size=12))
+ggplotly(graph)
+```
+
+Même distribution filtrée sur les articles ayant moins de 30 auteurs : 
+
+```{r}
+# Graphique
+graph <- whole_bso %>% filter(!is.na(nb_authors),
+                              nb_authors < 30,
+                              bso_classification != "unkonw") %>% ggplot(aes(x = nb_authors)) +
+   geom_histogram(bins = 40L, fill = "#112446") +
+   labs(x = "Nombre d'auteurs", y = "Nombre d'articles", 
+        title = "Distribution du nombre d'auteurs, selon la discipline 
+        de l'article") +
+   theme_ipsum() +
+   facet_wrap(vars(bso_classification), scales='fixed') +
+   theme(axis.title.y = element_text(size=12), 
+         axis.title.x = element_text(size=12))
+ggplotly(graph)
+```
+
+<br>
+
+### Statistiques générales sur la base des 8 années confondues
+
+```{r}
+global_stats(whole_bso)
+```
+
+<br>
+
+
+## VI - Summary table
+
+```{r eval=FALSE, include=FALSE}
+    # Runer hors du knit...
+
+### Summary table
+#data <- whole_bso
+
+
+    # "support"
+table <- data.frame("Mesure" = NA, 
+                    "2013" = NA, 
+                    "2014" = NA,
+                    "2015" = NA, 
+                    "2016" = NA, 
+                    "2017" = NA, 
+                    "2018" = NA, 
+                    "2019" = NA, 
+                    "2020" = NA, 
+                    "Total" = NA, check.names = FALSE)
+
+    # entrées de la table
+nb_articles_french_author <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is_at_least_one_french_author2 == 1) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles with (at least one) French author - BSO", .before = "2013")
+    assign("nb_articles_french_author", n, envir = .GlobalEnv) # on assigne l'objet à l'environnement
+}
+data %>% nb_articles_french_author("year")
+
+nb_articles_french_CA_bso <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is_french_CA == 1) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles with a French CA - BSO", .before = "2013")
+    assign("nb_articles_french_CA_bso", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_french_CA_bso("year")
+
+nb_articles_french_CA_wos <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is_french_CA_wos == 1) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles with a French CA - WOS", .before = "2013")
+    assign("nb_articles_french_CA_wos", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_french_CA_wos("year")
+
+nb_articles_non_french_CA_wos <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is_non_french_CA_wos == 1) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles with a non French CA - BSO", .before = "2013")
+    assign("nb_articles_non_french_CA_wos", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_non_french_CA_wos("year")
+
+nb_articles_french_CA_bso_wos <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is_french_CA_bso_wos == 1) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles with a French CA - BSO or WOS", .before = "2013")
+    assign("nb_articles_french_CA_bso_wos", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_french_CA_bso_wos("year")
+
+nb_articles_info_french_CA_bso_wos <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(!is.na(is_french_CA_bso_wos)) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles with reliable info on french CA (non missing value) - BSO or WOS", .before = "2013")
+    assign("nb_articles_info_french_CA_bso_wos", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_info_french_CA_bso_wos("year")
+
+nb_articles_no_info_french_CA_bso_wos <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is.na(is_french_CA_bso_wos)) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles without info on French CA (neither from BSO, nor from WOS)", .before = "2013")
+    assign("nb_articles_no_info_french_CA_bso_wos", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_no_info_french_CA_bso_wos("year")
+
+nb_articles_french_CA_openalex <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is_french_CA_openalex == 1) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles with a French CA - OpenAlex", .before = "2013")
+    assign("nb_articles_french_CA_openalex", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_french_CA_openalex("year")
+
+nb_articles_no_french_CA_openalex <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is_french_CA_openalex == 0) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles without French CA - OpenAlex (all authors known and all foreign)", .before = "2013")
+    assign("nb_articles_no_french_CA_openalex", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_no_french_CA_openalex("year")
+
+nb_articles_no_french_CA_single <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is.na(is_french_CA_bso_wos_openalex) & nb_authors == 1) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles without reliable info on french CA - written by single author", .before = "2013")
+    assign("nb_articles_no_french_CA_single", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_no_french_CA_single("year")
+
+nb_articles_no_french_CA_single_lang <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is.na(is_french_CA_bso_wos_openalex) & (nb_authors == 1 | lang == "fr")) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles without reliable info on french CA - written by single author or in french", .before = "2013")
+    assign("nb_articles_no_french_CA_single_lang", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_no_french_CA_single_lang("year")
+
+nb_articles_french_CA_bso_wos_openalex <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is_french_CA_bso_wos_openalex_single_lang == 1) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "CONCLU : Nr. of articles with French CA", .before = "2013")
+    assign("nb_articles_french_CA_bso_wos_openalex", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_french_CA_bso_wos_openalex("year")
+
+nb_articles_non_french_CA_bso_wos_openalex <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is_french_CA_bso_wos_openalex_single_lang == 0) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "CONCLU : Nr. of articles with non French CA", .before = "2013")
+    assign("nb_articles_non_french_CA_bso_wos_openalex", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_non_french_CA_bso_wos_openalex("year")
+
+nb_articles_na_french_CA_bso_wos_openalex <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is.na(is_french_CA_bso_wos_openalex_single_lang)) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "CONCLU : Nr. of articles without reliable info on country of CA", .before = "2013")
+    assign("nb_articles_na_french_CA_bso_wos_openalex", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_na_french_CA_bso_wos_openalex("year")
+
+nb_articles_not_diamond_gold <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(oa_color_article_BSO != "diamond" | oa_color_openalex != "gold") %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles not diamond (BSO) or gold (OpenAlex)", .before = "2013")
+    assign("nb_articles_not_diamond_gold", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_not_diamond_gold("year")
+
+nb_articles_not_diamond_gold_and_hybrid <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter((oa_color_article_BSO != "diamond" | oa_color_openalex != "gold") & journal_color_qoam == "hybrid") %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles not diamond (BSO) or gold (OpenAlex), and hybrid according to QOAM", .before = "2013")
+    assign("nb_articles_not_diamond_gold_and_hybrid", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_not_diamond_gold_and_hybrid("year")
+
+nb_articles_apc_paid <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(apc_has_been_paid == 1 & is_french_CA_bso_wos_openalex_single_lang == 1) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles where APC has been paid and with French CA", .before = "2013")
+    assign("nb_articles_apc_paid", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_apc_paid("year")
+
+nb_articles_apc_paid_apcsource <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(apc_has_been_paid == 1 & is_french_CA_bso_wos_openalex_single_lang == 1) %>% summarise(n = n()) %>% 
+      pivot_wider(names_from = year, values_from = n) %>% group_by(apc_source) %>% mutate(Total = sum(c_across(c(1:8)), na.rm = TRUE)) %>% replace(is.na(.), 0) %>% 
+      rename(Mesure = apc_source)
+    assign("nb_articles_apc_paid_apcsource", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_apc_paid_apcsource(c("year", "apc_source"))
+
+nb_articles_apc_paid_bronze <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(has_apc == 1 & oa_color_openalex == "bronze") %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles with APC (has_apc == 1) and with Bronze color (OpenAlex) - per APC source below", .before = "2013")
+    assign("nb_articles_apc_paid_bronze", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_apc_paid_bronze("year")
+
+nb_articles_has_apc_bronze_apcsource <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(has_apc == 1 & oa_color_openalex == "bronze") %>% summarise(n = n()) %>% 
+      pivot_wider(names_from = year, values_from = n) %>% group_by(apc_source) %>% mutate(Total = sum(c_across(c(1:8)), na.rm = TRUE)) %>% replace(is.na(.), 0) %>% 
+      rename(Mesure = apc_source)
+    assign("nb_articles_has_apc_bronze_apcsource", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_has_apc_bronze_apcsource(c("year", "apc_source"))
+
+nb_articles_apc_paid_no_frenchCA <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(apc_has_been_paid == 1 & is_french_CA_bso_wos_openalex_single_lang == 0) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles where APC has been paid and without French CA", .before = "2013")
+    assign("nb_articles_apc_paid_no_frenchCA", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_apc_paid_no_frenchCA("year")
+
+nb_articles_apc_paid_missing_frenchCA <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(apc_has_been_paid == 1 & is.na(is_french_CA_bso_wos_openalex_single_lang)) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles where APC has been paid and no info on French CA ", .before = "2013")
+    assign("nb_articles_apc_paid_missing_frenchCA", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_apc_paid_missing_frenchCA("year")
+
+nb_articles_apc_paid_APC <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(apc_has_been_paid == 1 & !is.na(amount_apc_EUR)) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles where APC has been paid and with info on APC", .before = "2013")
+    assign("nb_articles_apc_paid_APC", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_apc_paid_APC("year")
+
+nb_articles_apc_paid_APC_frenchCA <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(apc_has_been_paid == 1 & is_french_CA_bso_wos_openalex_single_lang == 1 & !is.na(amount_apc_EUR)) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles where APC has been paid, with French CA and with info on APC", .before = "2013")
+    assign("nb_articles_apc_paid_APC_frenchCA", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_apc_paid_APC_frenchCA("year")
+
+nb_articles_apc_paid_gold <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(apc_has_been_paid == 1 & oa_color_openalex == "gold") %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles where APC has been paid and gold journal according to OpenAlex", .before = "2013")
+    assign("nb_articles_apc_paid_gold", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_apc_paid_gold("year")
+
+nb_articles_apc_paid_hybrid <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(apc_has_been_paid == 1 & oa_color_openalex == "hybrid") %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles where APC has been paid and hybrid journal according to OpenAlex", .before = "2013")
+    assign("nb_articles_apc_paid_hybrid", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_apc_paid_hybrid("year")
+
+nb_articles_apc_paid_gold_frenchCA <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(apc_has_been_paid == 1 & is_french_CA_bso_wos_openalex_single_lang == 1 & oa_color_openalex == "gold") %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles where APC has been paid, with French CA and gold journal according to OpenAlex", .before = "2013")
+    assign("nb_articles_apc_paid_gold_frenchCA", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_apc_paid_gold_frenchCA("year")
+
+nb_articles_apc_paid_hybrid_frenchCA <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(apc_has_been_paid == 1 & is_french_CA_bso_wos_openalex_single_lang == 1 & oa_color_openalex == "hybrid") %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles where APC has been paid, with French CA and hybrid journal according to OpenAlex", .before = "2013")
+    assign("nb_articles_apc_paid_hybrid_frenchCA", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_apc_paid_hybrid_frenchCA("year")
+
+nb_articles_known_info <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(!is.na(is_french_CA_bso_wos_openalex_single_lang) & !is.na(amount_apc_EUR)) %>% summarise(n = n()) %>% 
+        t() %>% row_to_names(row_number = 1) %>% as.data.frame() %>% 
+        mutate(Total = sum(c_across(c(1:8)))) %>% mutate(Mesure = "Nr. of articles with known info (is_french_CA and APC)", .before = "2013")
+    assign("nb_articles_known_info", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_known_info("year")
+
+nb_articles_frenchCA_discipline <- function(data, group) {
+    n <- data %>% group_by_at(group) %>% filter(is_french_CA_bso_wos_openalex_single_lang == 1) %>% summarise(n = n()) %>% 
+      pivot_wider(names_from = year, values_from = n) %>% group_by(bso_classification) %>% mutate(Total = sum(c_across(c(1:8)), na.rm = TRUE)) %>% replace(is.na(.), 0) %>% 
+      rename(Mesure = bso_classification)
+    assign("nb_articles_frenchCA_discipline", n, envir = .GlobalEnv)
+}
+data %>% nb_articles_frenchCA_discipline(c("year", "bso_classification"))
+
+
+
+
+# Combinaison de toutes les lignes de la table
+summary_table <- rbind(table, nb_articles_french_author, nb_articles_french_CA_bso, nb_articles_french_CA_wos, nb_articles_non_french_CA_wos, nb_articles_french_CA_bso_wos, nb_articles_info_french_CA_bso_wos, nb_articles_no_info_french_CA_bso_wos, nb_articles_french_CA_openalex, nb_articles_no_french_CA_openalex, nb_articles_no_french_CA_single, nb_articles_no_french_CA_single_lang, nb_articles_french_CA_bso_wos_openalex, nb_articles_non_french_CA_bso_wos_openalex, nb_articles_na_french_CA_bso_wos_openalex, nb_articles_not_diamond_gold, nb_articles_not_diamond_gold_and_hybrid, nb_articles_apc_paid, nb_articles_apc_paid_apcsource, nb_articles_apc_paid_bronze, nb_articles_has_apc_bronze_apcsource, nb_articles_apc_paid_no_frenchCA, nb_articles_apc_paid_missing_frenchCA, nb_articles_apc_paid_APC, nb_articles_apc_paid_APC_frenchCA, nb_articles_apc_paid_gold, nb_articles_apc_paid_hybrid, nb_articles_apc_paid_gold_frenchCA, nb_articles_apc_paid_hybrid_frenchCA, nb_articles_known_info, nb_articles_frenchCA_discipline) %>% na.omit()
+
+# Export
+rio::export(summary_table, "../data/4.process/summary_table.csv")
+```
+
+```{r}
+# On affiche la table
+summary_table <- rio::import("../data/4.process/summary_table.csv")
+summary_table %>% na.omit() %>% DT::datatable(options = list(pageLength = 100, searching = F), width = '100%', rownames = FALSE)
+```
+
+
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
+
