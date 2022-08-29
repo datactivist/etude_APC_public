@@ -48,14 +48,14 @@
 <circle cx='533.57' cy='155.66' r='1.70' style='stroke-width: 2.13; stroke: #FFFFFF;' />
 <circle cx='605.53' cy='265.41' r='1.70' style='stroke-width: 2.13; stroke: #FFFFFF;' />
 <circle cx='605.53' cy='147.08' r='1.70' style='stroke-width: 2.13; stroke: #FFFFFF;' />
-<text x='157.58' y='343.98' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1413</text>
-<text x='157.55' y='156.36' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>2335</text>
-<text x='301.46' y='298.59' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1636</text>
-<text x='333.99' y='126.71' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>2407</text>
-<text x='477.84' y='277.90' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1664</text>
-<text x='445.31' y='144.92' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>2392</text>
-<text x='589.29' y='276.46' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1745</text>
-<text x='589.25' y='158.17' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>2326</text>
+<text x='190.02' y='328.97' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1413</text>
+<text x='157.57' y='156.37' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>2335</text>
+<text x='334.00' y='283.56' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1636</text>
+<text x='333.93' y='126.77' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>2407</text>
+<text x='477.90' y='277.86' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1664</text>
+<text x='445.36' y='144.93' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>2392</text>
+<text x='615.68' y='261.12' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1745</text>
+<text x='589.27' y='158.17' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>2326</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw0MzIuMDA=)'>
 <polyline points='76.65,349.84 76.65,93.54 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
@@ -169,7 +169,7 @@
 <text x='432.63' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='50.68px' lengthAdjust='spacingAndGlyphs'>Innovation.</text>
 <text x='488.80' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='15.77px' lengthAdjust='spacingAndGlyphs'>July</text>
 <text x='507.98' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='24.60px' lengthAdjust='spacingAndGlyphs'>2022.</text>
-<text x='536.13' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='16.56px' lengthAdjust='spacingAndGlyphs'>doi:</text>
+<text x='536.13' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='72.25px' lengthAdjust='spacingAndGlyphs'>doi:10.52949/26</text>
 <text x='21.91' y='16.48' text-anchor='middle' style='font-size: 13.20px; font-family: "Arial";' textLength='32.87px' lengthAdjust='spacingAndGlyphs'>Fig. 7</text>
 </g>
 </svg>

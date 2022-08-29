@@ -43,13 +43,13 @@
 <polyline points='130.64,338.57 192.37,319.09 254.10,297.97 315.84,276.10 377.57,254.46 439.30,231.76 501.03,195.72 562.77,123.56 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
 <polyline points='130.64,336.33 192.37,317.71 254.10,299.72 315.84,278.31 377.57,255.77 439.30,233.01 501.03,195.74 562.77,120.65 ' style='stroke-width: 1.07; stroke: #0072B2; stroke-linecap: butt;' />
 <polyline points='130.64,336.49 192.37,317.06 254.10,300.01 315.84,278.20 377.57,257.02 439.30,232.24 501.03,195.28 562.77,120.93 ' style='stroke-width: 1.07; stroke: #FFCC00; stroke-linecap: butt;' />
-<text x='150.46' y='346.24' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='39.12px' lengthAdjust='spacingAndGlyphs'>   7.3 M€</text>
-<text x='177.32' y='332.69' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='39.12px' lengthAdjust='spacingAndGlyphs'>   8.7 M€</text>
-<text x='238.54' y='309.06' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   10.7 M€</text>
-<text x='300.27' y='284.61' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   12.7 M€</text>
-<text x='393.22' y='247.95' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   14.5 M€</text>
-<text x='454.95' y='227.75' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   16.2 M€</text>
-<text x='485.46' y='209.24' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   19.0 M€</text>
+<text x='155.31' y='346.24' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='39.12px' lengthAdjust='spacingAndGlyphs'>   7.3 M€</text>
+<text x='208.06' y='317.16' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='39.12px' lengthAdjust='spacingAndGlyphs'>   8.7 M€</text>
+<text x='269.76' y='293.30' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   10.7 M€</text>
+<text x='331.01' y='269.06' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   12.7 M€</text>
+<text x='362.40' y='263.53' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   14.5 M€</text>
+<text x='455.00' y='227.74' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   16.2 M€</text>
+<text x='516.62' y='193.46' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   19.0 M€</text>
 <text x='535.26' y='120.45' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   25.2 M€</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw0MzIuMDA=)'>
@@ -188,7 +188,7 @@
 <text x='505.53' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='50.68px' lengthAdjust='spacingAndGlyphs'>Innovation.</text>
 <text x='561.71' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='15.77px' lengthAdjust='spacingAndGlyphs'>July</text>
 <text x='580.89' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='24.60px' lengthAdjust='spacingAndGlyphs'>2022.</text>
-<text x='609.03' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='16.56px' lengthAdjust='spacingAndGlyphs'>doi:</text>
+<text x='609.03' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='72.25px' lengthAdjust='spacingAndGlyphs'>doi:10.52949/26</text>
 <text x='25.69' y='16.48' text-anchor='middle' style='font-size: 13.20px; font-family: "Arial";' textLength='40.41px' lengthAdjust='spacingAndGlyphs'>Fig. 12</text>
 </g>
 </svg>

@@ -39,14 +39,14 @@
 <circle cx='527.43' cy='224.50' r='1.70' style='stroke-width: 2.13; stroke: #FFFFFF;' />
 <circle cx='607.04' cy='201.54' r='1.70' style='stroke-width: 2.13; stroke: #FFFFFF;' />
 <circle cx='686.66' cy='152.01' r='1.70' style='stroke-width: 2.13; stroke: #FFFFFF;' />
-<text x='121.92' y='306.24' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='33.54px' lengthAdjust='spacingAndGlyphs'>   7.3 M€</text>
-<text x='191.65' y='294.61' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='33.54px' lengthAdjust='spacingAndGlyphs'>   8.7 M€</text>
-<text x='271.20' y='278.65' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   10.7 M€</text>
-<text x='350.91' y='262.25' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   12.7 M€</text>
-<text x='430.50' y='248.32' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   14.5 M€</text>
-<text x='510.01' y='234.83' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   16.2 M€</text>
-<text x='589.72' y='211.85' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   19.0 M€</text>
-<text x='669.29' y='162.29' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   25.2 M€</text>
+<text x='146.62' y='291.77' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='33.54px' lengthAdjust='spacingAndGlyphs'>   7.3 M€</text>
+<text x='226.32' y='280.12' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='33.54px' lengthAdjust='spacingAndGlyphs'>   8.7 M€</text>
+<text x='271.27' y='278.62' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   10.7 M€</text>
+<text x='385.45' y='247.77' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   12.7 M€</text>
+<text x='465.24' y='233.77' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   14.5 M€</text>
+<text x='544.81' y='220.28' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   16.2 M€</text>
+<text x='624.42' y='197.31' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   19.0 M€</text>
+<text x='691.68' y='147.79' text-anchor='middle' style='font-size: 8.54px;fill: #333333; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>   25.2 M€</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw0MzIuMDA=)'>
 <polyline points='101.49,349.84 101.49,93.54 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
@@ -147,7 +147,7 @@
 <text x='432.63' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='50.68px' lengthAdjust='spacingAndGlyphs'>Innovation.</text>
 <text x='488.80' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='15.77px' lengthAdjust='spacingAndGlyphs'>July</text>
 <text x='507.98' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='24.60px' lengthAdjust='spacingAndGlyphs'>2022.</text>
-<text x='536.13' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='16.56px' lengthAdjust='spacingAndGlyphs'>doi:</text>
+<text x='536.13' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='72.25px' lengthAdjust='spacingAndGlyphs'>doi:10.52949/26</text>
 <text x='21.91' y='16.48' text-anchor='middle' style='font-size: 13.20px; font-family: "Arial";' textLength='32.87px' lengthAdjust='spacingAndGlyphs'>Fig. 9</text>
 </g>
 </svg>

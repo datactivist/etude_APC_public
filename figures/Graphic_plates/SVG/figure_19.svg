@@ -83,16 +83,15 @@
 <polyline points='133.26,332.75 155.85,331.27 178.43,329.23 201.02,327.14 223.60,325.36 246.19,323.64 268.77,320.71 291.36,314.40 313.94,311.05 336.53,307.64 359.11,304.16 381.70,300.62 404.28,297.03 426.87,293.36 449.45,289.64 472.04,285.85 494.62,281.99 517.21,278.08 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt;' />
 <polyline points='517.21,298.20 494.62,299.80 472.04,301.40 449.45,303.00 426.87,304.61 404.28,306.23 381.70,307.85 359.11,309.48 336.53,311.11 313.94,312.75 291.36,314.40 268.77,320.71 246.19,323.64 223.60,325.36 201.02,327.14 178.43,329.23 155.85,331.27 133.26,332.75 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt;' />
 <line x1='291.36' y1='349.84' x2='291.36' y2='109.74' style='stroke-width: 1.07; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
-<line x1='332.19' y1='192.91' x2='335.52' y2='190.92' style='stroke-width: 1.07; stroke: #333333;' />
-<line x1='377.31' y1='181.64' x2='380.68' y2='183.62' style='stroke-width: 1.07; stroke: #333333;' />
-<line x1='422.88' y1='173.86' x2='426.21' y2='177.63' style='stroke-width: 1.07; stroke: #333333;' />
-<line x1='475.99' y1='175.36' x2='473.00' y2='173.40' style='stroke-width: 1.07; stroke: #333333;' />
-<line x1='512.90' y1='164.84' x2='516.20' y2='166.81' style='stroke-width: 1.07; stroke: #333333;' />
-<text x='322.55' y='201.83' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='50.51px' lengthAdjust='spacingAndGlyphs'>   146.3 M€</text>
-<text x='364.39' y='179.84' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='50.51px' lengthAdjust='spacingAndGlyphs'>   152.2 M€</text>
-<text x='422.26' y='172.06' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='50.51px' lengthAdjust='spacingAndGlyphs'>   158.0 M€</text>
-<text x='479.96' y='184.28' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='50.51px' lengthAdjust='spacingAndGlyphs'>   163.4 M€</text>
-<text x='503.27' y='163.04' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='50.51px' lengthAdjust='spacingAndGlyphs'>   168.7 M€</text>
+<line x1='332.16' y1='192.93' x2='335.52' y2='190.92' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='377.35' y1='181.62' x2='380.69' y2='183.62' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='476.44' y1='175.41' x2='473.05' y2='173.37' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='512.88' y1='164.82' x2='516.20' y2='166.81' style='stroke-width: 1.07; stroke: #333333;' />
+<text x='322.50' y='201.85' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='50.51px' lengthAdjust='spacingAndGlyphs'>   146.3 M€</text>
+<text x='367.67' y='179.82' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='50.51px' lengthAdjust='spacingAndGlyphs'>   152.2 M€</text>
+<text x='425.40' y='173.96' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='50.51px' lengthAdjust='spacingAndGlyphs'>   158.0 M€</text>
+<text x='486.10' y='184.32' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='50.51px' lengthAdjust='spacingAndGlyphs'>   163.4 M€</text>
+<text x='503.21' y='163.02' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='50.51px' lengthAdjust='spacingAndGlyphs'>   168.7 M€</text>
 <text x='489.97' y='291.94' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   50.6 M€</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw0MzIuMDA=)'>
@@ -254,7 +253,7 @@
 <text x='505.53' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='50.68px' lengthAdjust='spacingAndGlyphs'>Innovation.</text>
 <text x='561.71' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='15.77px' lengthAdjust='spacingAndGlyphs'>July</text>
 <text x='580.89' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='24.60px' lengthAdjust='spacingAndGlyphs'>2022.</text>
-<text x='609.03' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='16.56px' lengthAdjust='spacingAndGlyphs'>doi:</text>
+<text x='609.03' y='409.17' style='font-size: 10.00px; font-style: italic;fill: #333333; font-family: "Arial";' textLength='72.25px' lengthAdjust='spacingAndGlyphs'>doi:10.52949/26</text>
 <text x='25.69' y='16.48' text-anchor='middle' style='font-size: 13.20px; font-family: "Arial";' textLength='40.41px' lengthAdjust='spacingAndGlyphs'>Fig. 19</text>
 </g>
 </svg>
