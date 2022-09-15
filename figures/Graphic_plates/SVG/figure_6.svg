@@ -146,7 +146,7 @@
 <text x='405.43' y='361.06' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='20.13px' lengthAdjust='spacingAndGlyphs'>2018</text>
 <text x='466.88' y='361.06' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='20.13px' lengthAdjust='spacingAndGlyphs'>2019</text>
 <text x='528.34' y='361.06' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='20.13px' lengthAdjust='spacingAndGlyphs'>2020</text>
-<text transform='translate(46.20,228.86) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='96.23px' lengthAdjust='spacingAndGlyphs'>Number of articles</text>
+<text transform='translate(46.20,228.86) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='66.00px' lengthAdjust='spacingAndGlyphs'>Average APC</text>
 <rect x='560.81' y='146.28' width='153.71' height='165.18' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <text x='566.29' y='160.93' style='font-size: 11.00px; font-family: "Arial";' textLength='2.86px' lengthAdjust='spacingAndGlyphs'> </text>
 <line x1='568.01' y1='176.37' x2='581.84' y2='176.37' style='stroke-width: 2.13; stroke: #025BBB; stroke-opacity: 0.90; stroke-linecap: butt;' />

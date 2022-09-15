@@ -65,23 +65,25 @@
 <polyline points='129.86,316.93 154.36,312.54 178.87,306.50 203.37,300.33 227.87,295.06 252.37,289.97 276.87,281.30 301.38,262.61 325.88,252.70 350.38,242.61 374.88,232.33 399.39,221.86 423.89,211.21 448.39,200.37 472.89,189.34 497.40,178.13 521.90,166.73 546.40,155.14 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt;' />
 <polyline points='546.40,214.70 521.90,219.41 497.40,224.14 472.89,228.89 448.39,233.65 423.89,238.45 399.39,243.24 374.88,248.06 350.38,252.89 325.88,257.75 301.38,262.61 276.87,281.30 252.37,289.97 227.87,295.06 203.37,300.33 178.87,306.50 154.36,312.54 129.86,316.93 ' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt;' />
 <line x1='301.38' y1='349.84' x2='301.38' y2='109.74' style='stroke-width: 1.07; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
-<line x1='149.59' y1='315.17' x2='153.34' y2='313.10' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='149.65' y1='315.13' x2='153.34' y2='313.10' style='stroke-width: 1.07; stroke: #333333;' />
 <line x1='198.65' y1='302.93' x2='202.34' y2='300.90' style='stroke-width: 1.07; stroke: #333333;' />
-<line x1='345.63' y1='250.40' x2='349.36' y2='248.34' style='stroke-width: 1.07; stroke: #333333;' />
-<line x1='404.10' y1='230.07' x2='400.41' y2='232.10' style='stroke-width: 1.07; stroke: #333333;' />
-<line x1='453.07' y1='214.69' x2='449.42' y2='216.71' style='stroke-width: 1.07; stroke: #333333;' />
-<line x1='502.07' y1='199.02' x2='498.42' y2='201.03' style='stroke-width: 1.07; stroke: #333333;' />
-<line x1='541.77' y1='183.09' x2='545.38' y2='185.08' style='stroke-width: 1.07; stroke: #333333;' />
-<text x='139.06' y='324.09' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='39.12px' lengthAdjust='spacingAndGlyphs'>   8.7 M€</text>
-<text x='188.18' y='311.85' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   12.7 M€</text>
-<text x='265.73' y='286.53' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   16.2 M€</text>
-<text x='287.30' y='273.58' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   25.2 M€</text>
-<text x='335.19' y='259.31' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   30.1 M€</text>
-<text x='414.59' y='228.27' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   35.1 M€</text>
-<text x='463.49' y='212.89' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   40.1 M€</text>
-<text x='512.55' y='197.22' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   45.3 M€</text>
-<text x='531.32' y='181.29' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   50.6 M€</text>
-<text x='523.26' y='319.87' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='36.53px' lengthAdjust='spacingAndGlyphs'>  7.4 M€</text>
+<line x1='257.00' y1='287.42' x2='253.40' y2='289.40' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='296.71' y1='260.04' x2='300.35' y2='262.05' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='355.09' y1='250.37' x2='351.41' y2='248.34' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='394.75' y1='235.22' x2='398.36' y2='233.23' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='453.06' y1='214.70' x2='449.42' y2='216.71' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='502.09' y1='199.01' x2='498.42' y2='201.03' style='stroke-width: 1.07; stroke: #333333;' />
+<line x1='541.71' y1='183.06' x2='545.38' y2='185.08' style='stroke-width: 1.07; stroke: #333333;' />
+<text x='139.10' y='324.05' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='39.12px' lengthAdjust='spacingAndGlyphs'>   8.7 M€</text>
+<text x='188.19' y='311.84' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   12.7 M€</text>
+<text x='267.44' y='285.62' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   16.2 M€</text>
+<text x='286.21' y='258.24' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   25.2 M€</text>
+<text x='365.53' y='259.28' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   30.1 M€</text>
+<text x='384.27' y='244.14' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   35.1 M€</text>
+<text x='463.54' y='212.90' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   40.1 M€</text>
+<text x='512.55' y='197.21' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   45.3 M€</text>
+<text x='531.26' y='181.26' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   50.6 M€</text>
+<text x='523.26' y='319.94' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='36.53px' lengthAdjust='spacingAndGlyphs'>  7.4 M€</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw0MzIuMDA=)'>
 <polyline points='109.03,349.84 109.03,109.74 ' style='stroke-width: 1.07; stroke-linecap: butt;' />

@@ -43,14 +43,14 @@
 <polyline points='130.64,338.57 192.37,319.09 254.10,297.97 315.84,276.10 377.57,254.46 439.30,231.76 501.03,195.72 562.77,123.56 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
 <polyline points='130.64,336.33 192.37,317.71 254.10,299.72 315.84,278.31 377.57,255.77 439.30,233.01 501.03,195.74 562.77,120.65 ' style='stroke-width: 1.07; stroke: #0072B2; stroke-linecap: butt;' />
 <polyline points='130.64,336.49 192.37,317.06 254.10,300.01 315.84,278.20 377.57,257.02 439.30,232.24 501.03,195.28 562.77,120.93 ' style='stroke-width: 1.07; stroke: #FFCC00; stroke-linecap: butt;' />
-<text x='155.31' y='346.24' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='39.12px' lengthAdjust='spacingAndGlyphs'>   7.3 M€</text>
+<text x='155.21' y='346.23' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='39.12px' lengthAdjust='spacingAndGlyphs'>   7.3 M€</text>
 <text x='208.06' y='317.16' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='39.12px' lengthAdjust='spacingAndGlyphs'>   8.7 M€</text>
-<text x='269.76' y='293.30' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   10.7 M€</text>
-<text x='331.01' y='269.06' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   12.7 M€</text>
-<text x='362.40' y='263.53' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   14.5 M€</text>
-<text x='455.00' y='227.74' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   16.2 M€</text>
-<text x='516.62' y='193.46' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   19.0 M€</text>
-<text x='535.26' y='120.45' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   25.2 M€</text>
+<text x='269.36' y='293.49' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   10.7 M€</text>
+<text x='300.58' y='284.42' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   12.7 M€</text>
+<text x='361.84' y='263.79' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   14.5 M€</text>
+<text x='454.87' y='227.79' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   16.2 M€</text>
+<text x='485.33' y='209.28' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   19.0 M€</text>
+<text x='547.18' y='135.21' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='44.81px' lengthAdjust='spacingAndGlyphs'>   25.2 M€</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw0MzIuMDA=)'>
 <polyline points='109.03,349.84 109.03,109.74 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
@@ -79,7 +79,7 @@
 <text x='439.30' y='361.06' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='20.13px' lengthAdjust='spacingAndGlyphs'>2018</text>
 <text x='501.03' y='361.06' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='20.13px' lengthAdjust='spacingAndGlyphs'>2019</text>
 <text x='562.77' y='361.06' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='20.13px' lengthAdjust='spacingAndGlyphs'>2020</text>
-<text transform='translate(53.75,229.79) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='96.23px' lengthAdjust='spacingAndGlyphs'>Number of articles</text>
+<text transform='translate(53.75,229.79) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='91.84px' lengthAdjust='spacingAndGlyphs'>Total cost of APCs</text>
 <rect x='595.33' y='173.12' width='119.19' height='113.34' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <text x='600.81' y='187.78' style='font-size: 11.00px; font-family: "Arial";' textLength='2.86px' lengthAdjust='spacingAndGlyphs'> </text>
 <line x1='602.54' y1='203.22' x2='616.36' y2='203.22' style='stroke-width: 1.07; stroke: #FF0000; stroke-linecap: butt;' />

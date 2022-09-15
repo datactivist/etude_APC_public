@@ -48,14 +48,14 @@
 <circle cx='517.46' cy='140.04' r='1.70' style='stroke-width: 2.13; stroke: #FFFFFF;' />
 <circle cx='586.88' cy='181.90' r='1.70' style='stroke-width: 2.13; stroke: #FFFFFF;' />
 <circle cx='586.88' cy='120.65' r='1.70' style='stroke-width: 2.13; stroke: #FFFFFF;' />
-<text x='154.01' y='325.25' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1554</text>
-<text x='186.73' y='230.88' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1720</text>
-<text x='325.56' y='219.64' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1743</text>
-<text x='292.82' y='170.92' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1876</text>
-<text x='431.60' y='220.24' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1773</text>
-<text x='431.67' y='140.28' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1939</text>
-<text x='570.52' y='192.78' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1830</text>
-<text x='570.50' y='131.55' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1958</text>
+<text x='186.80' y='310.53' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1554</text>
+<text x='186.80' y='230.87' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1720</text>
+<text x='292.85' y='234.34' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1743</text>
+<text x='292.77' y='170.95' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1876</text>
+<text x='431.62' y='220.23' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1773</text>
+<text x='464.41' y='125.61' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1939</text>
+<text x='596.14' y='177.63' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1830</text>
+<text x='570.44' y='131.58' text-anchor='middle' style='font-size: 9.96px;fill: #333333; font-family: "Arial";' textLength='22.78px' lengthAdjust='spacingAndGlyphs'>1958</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw0MzIuMDA=)'>
 <polyline points='76.65,349.84 76.65,109.74 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
@@ -86,7 +86,7 @@
 <text x='448.04' y='361.06' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='20.13px' lengthAdjust='spacingAndGlyphs'>2018</text>
 <text x='517.46' y='361.06' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='20.13px' lengthAdjust='spacingAndGlyphs'>2019</text>
 <text x='586.88' y='361.06' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='20.13px' lengthAdjust='spacingAndGlyphs'>2020</text>
-<text transform='translate(46.20,229.79) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='96.23px' lengthAdjust='spacingAndGlyphs'>Number of articles</text>
+<text transform='translate(46.20,229.79) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='66.00px' lengthAdjust='spacingAndGlyphs'>Average APC</text>
 <rect x='622.14' y='199.04' width='92.38' height='61.50' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <text x='627.62' y='213.70' style='font-size: 11.00px; font-family: "Arial";' textLength='2.86px' lengthAdjust='spacingAndGlyphs'> </text>
 <line x1='629.34' y1='229.14' x2='643.17' y2='229.14' style='stroke-width: 2.13; stroke: #009E73; stroke-opacity: 0.90; stroke-linecap: butt;' />
